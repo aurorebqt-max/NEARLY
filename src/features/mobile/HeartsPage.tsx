@@ -2,7 +2,7 @@ import { people, sampleProfile } from '../demo/fixtures';
 import { useState } from 'react';
 import { Icon } from '../../design-system/components/Icon';
 import { useDemo } from '../demo/demoContext';
-import { ScreenHeading, PersonPreview, UnavailableButton, EmptyState, Avatar } from './components';
+import { ScreenHeading, PersonPreview, UnavailableButton, EmptyState, Avatar, SignalDivider } from './components';
 export function HeartsPage() {
   const { hearts, unread } = useDemo();
   const [empty, setEmpty] = useState(false);
@@ -17,6 +17,7 @@ export function HeartsPage() {
       <p className="heart-caption">{heart.sender.name} vous a envoyé un cœur fictif.</p>
       <UnavailableButton>Envoyer un cœur en retour</UnavailableButton>
     </article>)}</div>
+    <SignalDivider />
     <details className="match-preview"><summary>Aperçu d’un match fictif</summary><div className="match-scene"><span className="eyebrow">DÉMONSTRATION VISUELLE</span><div className="match-pair"><Avatar person={sampleProfile} /><Icon name="heart" /><Avatar person={people[0]} /></div><h2>Le même élan.</h2><p>Deux cœurs volontaires, un match réciproque.</p><span>Aucun match n’est créé dans cet aperçu.</span></div></details>
     <p className="screen-note">La consultation ne change pas le compteur dans cette démo. Le geste qui marquera un cœur comme lu reste à définir.</p>
   </section>;

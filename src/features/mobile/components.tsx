@@ -33,3 +33,6 @@ export function Portrait({ name }: { name: string }) {
 export function EmptyState({ title, children }: { title: string; children: ReactNode }) {
   return <div className="empty-state"><span className="empty-symbol"><Icon name="spark" /></span><span className="eyebrow">APERÇU D’UN ÉTAT VIDE</span><h2>{title}</h2><p>{children}</p></div>;
 }
+export function SignalDivider() {
+  return <div className="signal-divider" aria-hidden="true"><span /><i>✦</i><span /></div>;
+}

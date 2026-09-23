@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { sampleEncounters } from '../demo/fixtures';
-import { Avatar, EmptyState, PersonPreview, ScreenHeading, UnavailableButton } from './components';
+import { Avatar, EmptyState, PersonPreview, ScreenHeading, UnavailableButton, SignalDivider } from './components';
 export function EncountersPage() {
   const [revealed, setRevealed] = useState<string[]>([]);
   const [empty, setEmpty] = useState(false);
@@ -17,6 +17,7 @@ export function EncountersPage() {
         <button className="outline-button" onClick={() => setRevealed(current => [...current, encounter.id])}>Découvrir le profil fictif <span className="sr-only">{index + 1}</span></button>
       </>}
     </article>)}</div>}
+    <SignalDivider />
     <p className="screen-note">Aucun lieu ni trajet affiché. Consulter un profil ne lui envoie aucune notification.</p>
   </section>;
 }
