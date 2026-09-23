@@ -1,6 +1,6 @@
 # NEARLY ♡
 
-**Statut : mission 3 — finition visuelle de l’interface smartphone.** Nearly cible exclusivement les smartphones iPhone et Android. React/Vite sert à tester le design dans Codespaces, avec un cadre smartphone centré sur iPad et ordinateur. Les quatre rubriques utilisent des données fictives. Aucune fonctionnalité de rencontre réelle ni migration React Native n’est implémentée. Voir [PROGRESS.md](PROGRESS.md) pour reprendre le travail.
+**Statut : mission 4 — direction artistique romantic tech premium (affinages visuels).** Nearly cible exclusivement les smartphones iPhone et Android. React/Vite sert à tester le design dans Codespaces, avec un cadre smartphone centré sur iPad et ordinateur. Les quatre rubriques utilisent des données fictives. Aucune fonctionnalité de rencontre réelle ni migration React Native n’est implémentée. Voir [PROGRESS.md](PROGRESS.md) pour reprendre le travail.
 
 > Nom provisoire : **Nearly** — « Closer than you think. » Disponibilité du nom/de la marque/du domaine non vérifiée. Ne pas copier les visuels, sons ou interface de *Love Alarm*.
 

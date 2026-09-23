@@ -43,3 +43,8 @@ Le radar doit être une **animation d'état**, pas une carte et pas des points g
 - Cœurs : synthèse des cœurs non lus, état vide fictif et aperçu visuel de match étiqueté « démonstration » — aucun match n’est créé, le compteur non lu est inchangé.
 - Profil : portrait SVG original et fictif, section « Ce qui vous ressemble » présentée sans champs actifs, boutons de paramètres affichés mais inactifs (« À venir »).
 - Aucune règle métier ouverte n’est déduite ni implémentée. Les états vides et l’aperçu de match sont des bascules locales de présentation.
+
+## Affinages premium — mission 4
+- Compteur central : pastille de verre discrète derrière le chiffre (halo, bordure perle, chiffres tabulaires), contraste perle sur le cœur rose fixe ; reste strictement le compteur de cœurs non lus.
+- Navigation basse : état actif en capsule dock flottante (glassmorphism léger, glow discret, soulignement fin), sans lourd aplat ; même structure d’onglets et mêmes zones tactiles.
+- Palette officielle et réduction des mouvements inchangées. Aucune règle métier ajoutée.
