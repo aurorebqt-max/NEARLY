@@ -35,3 +35,11 @@ Le radar doit être une **animation d'état**, pas une carte et pas des points g
 - Cœurs : expéditeurs fictifs identifiés. Aucun marquage automatique comme lu : le déclencheur métier est encore ouvert. L’envoi et le retour de cœur restent indisponibles.
 - Profil : personnage fictif, emplacements photo illustratifs, personnalisation et paramètres présentés mais inactifs. Les champs détaillés restent à décider.
 - Toutes les données sont des exemples de présentation, pas des valeurs par défaut pour les futurs comptes.
+
+## Finition visuelle — mission 3
+- Raffinement « Romantic Future » limité au cadre smartphone : dégradés nuit/rose, contrastes de texte, respirations du cœur, focus visible et cibles tactiles. Palette officielle inchangée.
+- Accueil : respiration lente du grand cœur au repos ; l’animation de réception d’origine (2 → 3) est conservée sans changement de couleur.
+- Rencontres : bascule de démonstration vers un état vide fictif, sans expiration réelle ni suppression de données.
+- Cœurs : synthèse des cœurs non lus, état vide fictif et aperçu visuel de match étiqueté « démonstration » — aucun match n’est créé, le compteur non lu est inchangé.
+- Profil : portrait SVG original et fictif, section « Ce qui vous ressemble » présentée sans champs actifs, boutons de paramètres affichés mais inactifs (« À venir »).
+- Aucune règle métier ouverte n’est déduite ni implémentée. Les états vides et l’aperçu de match sont des bascules locales de présentation.

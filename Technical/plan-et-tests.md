@@ -44,3 +44,6 @@ Vérifications de ce socle : lint, TypeScript, build et parcours Playwright sur 
 Vérifier les quatre rubriques en Chromium mobile et WebKit mobile, la conservation de la présentation, l’historique et les liens directs. Contrôler le défilement indépendant de la navigation, la largeur 320 px, le cadre vertical centré à 820 et 1440 px, le focus clavier et la réduction des mouvements.
 
 Le test du compteur vérifie 2 → 3 à l’ajout d’un cœur fictif, sa couleur rose constante, l’absence de marquage comme lu lors de la navigation, la liste d’expéditeurs cohérente et l’absence de nouvelle animation au retour à l’accueil. Les tests ne valident aucun backend ni mécanisme réel d’expiration/notification.
+
+## Mission 3 — finition visuelle
+Vérifier la bascule des états vides sur Rencontres et Cœurs, l’aperçu de match sans création de match ni changement du compteur non lus, les largeurs 360 px et 430 px, les cibles tactiles d’au moins 44 px, les marges de safe area de la navigation et l’absence de débordement horizontal. Lint, TypeScript, build et les parcours Chromium mobile / WebKit mobile / Chromium bureau doivent rester verts. Ces tests ne valident aucune règle métier ouverte ni expiration, lecture ou match réels.

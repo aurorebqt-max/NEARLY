@@ -1,6 +1,6 @@
 # NEARLY ♡
 
-**Statut : mission 2 — prototype d’interface smartphone.** Nearly cible exclusivement les smartphones iPhone et Android. React/Vite sert à tester le design dans Codespaces, avec un cadre smartphone centré sur iPad et ordinateur. Les quatre rubriques utilisent des données fictives. Aucune fonctionnalité de rencontre réelle ni migration React Native n’est implémentée. Voir [PROGRESS.md](PROGRESS.md) pour reprendre le travail.
+**Statut : mission 3 — finition visuelle de l’interface smartphone.** Nearly cible exclusivement les smartphones iPhone et Android. React/Vite sert à tester le design dans Codespaces, avec un cadre smartphone centré sur iPad et ordinateur. Les quatre rubriques utilisent des données fictives. Aucune fonctionnalité de rencontre réelle ni migration React Native n’est implémentée. Voir [PROGRESS.md](PROGRESS.md) pour reprendre le travail.
 
 > Nom provisoire : **Nearly** — « Closer than you think. » Disponibilité du nom/de la marque/du domaine non vérifiée. Ne pas copier les visuels, sons ou interface de *Love Alarm*.
 
@@ -45,7 +45,7 @@ npm test
 Playwright peut demander des bibliothèques système supplémentaires sur une nouvelle machine (`npx playwright install-deps chromium webkit`). Les tests lancent le serveur de prévisualisation sur le port 4173 et nécessitent un build préalable. `npm run preview` permet aussi d'inspecter le build manuellement.
 
 ## Structure
-- `src/app/` : navigation et cadre de l'application web.
+- `src/app/` : navigation, cadre de l'application web et raffinement visuel `romantic-future.css`.
 - `src/features/mobile/` : les quatre écrans smartphone et leurs composants communs.
 - `src/features/demo/` : données fictives TypeScript et contexte de démonstration en mémoire.
 - `src/features/welcome/`, `src/features/home/` : présentation existante conservée.

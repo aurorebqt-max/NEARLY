@@ -10,6 +10,7 @@ import { HeartsPage } from '../features/mobile/HeartsPage';
 import { ProfilePage } from '../features/mobile/ProfilePage';
 import { routes } from './routes';
 import './phone.css';
+import './romantic-future.css';
 
 function PresentationShell() {
   const { pathname } = useLocation();

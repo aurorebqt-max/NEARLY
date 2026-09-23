@@ -32,3 +32,6 @@ Le design system expose la palette officielle depuis TypeScript en variables CSS
 Les fixtures et les tokens sont du TypeScript indépendant du DOM. Le contexte React de démonstration n’est pas un moteur métier ni le stockage prévu pour la production. Les composants `ScreenHeading`, `Avatar`, `PersonPreview`, `UnavailableButton` et le cœur sont réutilisés entre les écrans.
 
 La future application cible exclusivement iPhone/Android. Le cadre navigateur et ses safe areas CSS appartiennent à l’adaptateur web ; ils seront remplacés par des vues, une navigation et une gestion des safe areas natives. Aucune dépendance ni migration React Native n’est ajoutée dans cette mission.
+
+## Finition visuelle — mission 3
+`src/app/romantic-future.css` surcharge l’habillage du cadre smartphone sans modifier `phone.css` ni les tokens de palette. Les composants `Portrait` et `EmptyState` rejoignent `src/features/mobile/components.tsx` ; ils consomment les mêmes fixtures fictives et n’introduisent ni persistance, ni réseau, ni règle de match/lecture/expiration. L’aperçu de match est un simple bloc de démonstration locale. Aucune dépendance ni migration React Native n’est ajoutée.

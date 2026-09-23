@@ -14,7 +14,7 @@ export function DashboardPage() {
   return <section className="mobile-screen dashboard">
     <ScreenHeading eyebrow="UN PEU PLUS PRÈS" title="Un cœur peut tout changer.">Une rencontre commence par un choix.</ScreenHeading>
     <div className="unread-heart" key={arrival.sequence} data-received={arrival.sequence > 0}>
-      <Heart animated={false} />
+      <div className="heart-idle"><Heart animated={false} /></div>
       <span className="heart-number" aria-hidden="true">{unread}</span>
       {arrival.sequence > 0 && <span className="received-ring" aria-hidden="true" />}
     </div>

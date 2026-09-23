@@ -94,3 +94,42 @@ test('tablet and desktop keep a centered portrait phone', async ({ page }) => {
     await expect(page.getByRole('navigation')).toBeInViewport();
   }
 });
+
+test('empty and reciprocal match previews do not change unread hearts', async ({ page }) => {
+  await page.goto('/#/rencontres');
+  await page.getByRole('button', { name: 'Voir l’état vide (démo)' }).click();
+  await expect(page.getByRole('heading', { name: 'Le prochain croisement reste à écrire.' })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Découvrir le profil fictif/ })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Revoir les suggestions fictives' }).click();
+  await expect(page.getByRole('button', { name: /Découvrir le profil fictif/ })).toHaveCount(2);
+  await page.getByRole('navigation').getByRole('link', { name: 'Cœurs', exact: true }).click();
+  await page.getByRole('button', { name: 'Voir l’état vide (démo)' }).click();
+  await expect(page.getByRole('heading', { name: 'Une place pour le premier cœur.' })).toBeVisible();
+  await page.getByText('Aperçu d’un match fictif', { exact: true }).click();
+  await expect(page.getByText('Aucun match n’est créé dans cet aperçu.')).toBeVisible();
+  await page.getByRole('navigation').getByRole('link', { name: 'Accueil', exact: true }).click();
+  await expect(page.getByRole('status')).toContainText('2 cœurs non lus');
+});
+
+test('larger phones, safe area allowances and comfortable touch navigation', async ({ page }) => {
+  for (const width of [360, 430]) {
+    await page.setViewportSize({ width, height: 932 });
+    await page.goto('/#/accueil');
+    await page.locator('.phone-frame').evaluate(el => {
+      (el as HTMLElement).style.setProperty('--safe-top', '24px');
+      (el as HTMLElement).style.setProperty('--safe-bottom', '34px');
+    });
+    await expect(page.locator('.phone-nav')).toHaveCSS('padding-bottom', '46px');
+    for (const label of ['Accueil', 'Rencontres', 'Cœurs', 'Profil']) {
+      const link = page.getByRole('navigation').getByRole('link', { name: label, exact: true });
+      await link.click();
+      const box = await link.boundingBox();
+      expect(box!.height).toBeGreaterThanOrEqual(44);
+      expect(box!.width).toBeGreaterThanOrEqual(44);
+      expect(await page.locator('.phone-content').evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
+      const main = await page.getByRole('main').boundingBox();
+      const nav = await page.getByRole('navigation').boundingBox();
+      expect(main!.y + main!.height).toBeLessThanOrEqual(nav!.y + 1);
+    }
+  }
+});
