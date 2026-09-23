@@ -12,13 +12,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aurorebqt-max/FREYMO.git"
+    "url": "git+https://github.com/aurorebqt-max/NEARLY.git"
   },
   "keywords": [],
   "author": "",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/aurorebqt-max/FREYMO/issues"
+    "url": "https://github.com/aurorebqt-max/NEARLY/issues"
   },
   "dependencies": {
     "react": "^19.3.0",

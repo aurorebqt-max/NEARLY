@@ -11,7 +11,7 @@ Mise à jour : 23 septembre 2026. Mission autorisée : **mission 1 — initialis
 - Documentation des règles validées : sens directionnel, consentement préalable, distinction pause/invisible et conservation des cœurs/matchs dans ces deux modes.
 
 ## En cours
-- Vérifications navigateur et sauvegarde de fin de mission. Mettre à jour cette section après les résultats.
+Aucune fonctionnalité en cours. Mission 1 terminée et vérifiée ; attendre l’accord avant la mission suivante.
 
 ## Non implémenté
 Authentification, profils réels, questionnaire, algorithme de compatibilité, rencontres, radar, envoi/réception de cœurs, compteur, matchs, paramètres, backend, Bluetooth, notifications push et données de santé. Les présentations visuelles ne sont pas des fonctionnalités métier terminées.
@@ -23,15 +23,18 @@ Voir Docs/06-questions-ouvertes.md : questionnaire et pondérations, paramètres
 - npm install : réussi après autorisation d'accès réseau ; aucun problème de dépendances signalé par npm.
 - Lint : réussi.
 - TypeScript et build : réussis ; déclaration Vite des imports CSS ajoutée après une première erreur de type.
-- Navigateurs Playwright : installation en cours. Résultats non encore confirmés.
-- Aucun téléphone physique disponible dans cette session ; les essais navigateur à venir ne prouveront pas les capacités natives.
+- Playwright : **6 tests réussis** sur Chromium mobile (Pixel 7), WebKit mobile (iPhone 13) et Chromium bureau. Parcours, historique, rechargement, pages inconnues, largeur 320 px, réduction des animations et accès clavier vérifiés.
+- Captures de bienvenue et accueil générées dans `test-results/` (ignorées par Git) ; inspection visuelle effectuée. Débordement des cercles décoratifs et visibilité du bouton d’accès clavier hors focus corrigés.
+- Aucun problème bloquant connu pour ce périmètre. Installation des navigateurs/bibliothèques et ouverture du serveur local ont nécessité les autorisations de l’environnement.
+- Aucun téléphone physique disponible dans cette session ; les essais navigateur ne prouvent pas les capacités natives. Une ouverture sur téléphone réel reste à faire via le port 5173, selon README.md.
 
 ## Prochaine mission proposée — à autoriser
 Revue visuelle sur un téléphone réel, choix du prochain parcours à construire et arbitrage de ses règles ouvertes avant implémentation. La preuve technique de proximité reste nécessaire avant de promettre une détection native.
 
 ## Sauvegarde et reprise
-- Branche : main ; distant : origin (aurorebqt-max/FREYMO).
-- Ce fichier accompagne le premier jalon local ; ne pas présumer que GitHub est synchronisé avant confirmation du push.
+- Branche : main ; distant : origin (aurorebqt-max/NEARLY), adresse mise à jour après redirection confirmée par GitHub.
+- Premier jalon `bde0a40` poussé avec succès sur GitHub. Le présent bilan accompagne le commit final des corrections mobiles et vérifications.
+- Après chaque push, vérifier que `git status --short` est vide et que `git rev-parse HEAD`, `git rev-parse origin/main` et `git ls-remote origin refs/heads/main` donnent le même commit. Le résultat de la vérification finale est communiqué en fin de mission.
 - Reprendre par `git status`, ce document, README.md et les décisions de Docs/.
 - Installation : `npm ci` ; lancement : `npm run dev` (port 5173, toutes interfaces).
 - Contrôles : `npm run lint`, `npm run typecheck`, `npm run build`, `npm test` après installation des navigateurs Playwright.
