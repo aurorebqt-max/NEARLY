@@ -1,6 +1,6 @@
 # Premier message à donner à Codex
 
-Tu travailles sur un projet **en conception**, appelé provisoirement Nearly. Lis intégralement le README et les fichiers `docs/` et `technical/` avant de proposer une modification.
+Tu travailles sur Nearly, en développement progressif avec un cahier des charges vivant. Lis README.md, PROGRESS.md, Docs/ et Technical/ avant toute modification. Les fonctionnalités aux règles validées peuvent être implémentées dans le périmètre de la mission autorisée.
 
 RÈGLES IMPÉRATIVES :
 1. Distingue VALIDÉ, PROPOSÉ et À DÉCIDER. N'invente pas de décision manquante.
@@ -10,9 +10,13 @@ RÈGLES IMPÉRATIVES :
 5. Ne copie pas les assets de Love Alarm. Nom Nearly provisoire.
 6. La capacité native de proximité en arrière-plan **n'est pas prouvée** : signaler les risques, prévoir une simulation honnête et un prototype technique tôt.
 7. Ne commence pas par coder toute l'application ni par générer des migrations SQL définitives.
+8. Radar désactivé par défaut ; l'activation volontaire autorise la découverte du profil selon les paramètres de confidentialité, sans accord par rencontre. La suggestion ne révèle ni identité, ni photo, ni position exacte ; consulter un profil ne notifie pas son propriétaire.
+9. Distingue impérativement **pause du radar** (plus de détectabilité ni de nouvelles rencontres, découvertes existantes conservées jusqu'à expiration sauf blocage/invisibilité) et **mode invisible** (plus de nouvelles rencontres, accès au profil immédiatement révoqué dans les découvertes existantes, sans restauration automatique à la réactivation).
+10. Pause et invisibilité préservent l'accès aux cœurs déjà envoyés et matchs existants, sauf blocage, suppression du compte ou retrait spécifique. Une rencontre expirée/révoquée ne permet plus de retrouver un profil par cette rencontre. Ne déduis pas de ces règles la durée des cœurs/matchs après expiration ni les conséquences détaillées d'un retrait, encore à décider.
 
-PREMIÈRE MISSION :
-- Lis le dossier ; produis un diagnostic bref des contradictions, des questions bloquantes et du bon ordre de construction.
-- Propose une structure de dépôt avec modules métier testables et adapter de proximité simulé/remplaçable.
-- Prépare uniquement un plan de travail et, si demandé ensuite, la base du prototype web. Pas de faux Bluetooth, pas de clés Supabase exposées, pas de promesse juridique.
-- Pour toute phase codée : diff limité, tests pertinents, typecheck/build, explication des fichiers et commandes de vérification.
+REPRISE ET SAUVEGARDE :
+- Le diagnostic initial est terminé. La mission 1 initialise le prototype visuel ; consulter PROGRESS.md pour son état réel.
+- Ne jamais implémenter une règle ouverte ni commencer une mission suivante sans accord.
+- Pour toute phase codée : diff limité, lint/typecheck/tests/build pertinents, description honnête de ce qui fonctionne et des maquettes.
+- Mettre à jour PROGRESS.md à chaque jalon cohérent, committer et pousser sur GitHub lorsque autorisé ; vérifier la synchronisation. Ne jamais annoncer une sauvegarde distante sans push réussi.
+- Aucun faux Bluetooth, aucune clé secrète dans le client, aucune promesse juridique.

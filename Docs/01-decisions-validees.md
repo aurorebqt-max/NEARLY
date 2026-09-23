@@ -9,13 +9,23 @@ Ce document sépare les **décisions produit** des préférences fictives citée
 
 ## Mécanique fondamentale, directionnelle
 - **VALIDÉ** : si le profil de **B** correspond aux préférences de **A** et qu'une rencontre admissible est détectée, **B** reçoit une première notification anonyme : « Tu pourrais plaire à quelqu'un à proximité. »
-- **VALIDÉ** : B peut ouvrir Nearly puis découvrir le profil de A, sous réserve de règles de visibilité/consentement **encore à finaliser**.
+- **VALIDÉ** : la notification anonyme ne révèle ni l'identité de A, ni sa photo, ni sa position exacte. B peut découvrir le profil de A dans ses rencontres potentielles, selon le consentement préalable et les paramètres de confidentialité de A décrits ci-dessous, sans autorisation supplémentaire par rencontre.
+- **VALIDÉ** : consulter le profil de A ne déclenche aucune notification à A. Aucune notification d'intérêt n'est envoyée à A avant l'envoi volontaire du cœur de B.
 - **VALIDÉ** : B peut envoyer volontairement un cœur à A ; **A** reçoit alors l'alarme emblématique et découvre l'identité de B.
 - **VALIDÉ** : si A envoie un cœur en retour, **match immédiat**. Les correspondances A→B et B→A sont évaluées indépendamment. Une simple compatibilité n'est pas un cœur.
 - **VALIDÉ** : rencontre potentielle disponible **24 heures** ; sort des cœurs et matchs une fois cette fenêtre expirée : **À DÉCIDER**.
 - **VALIDÉ** : plusieurs détections proches dans le temps sont regroupées intelligemment pour éviter des vibrations en rafale ; fenêtre de regroupement : **À DÉCIDER**.
 - **VALIDÉ** : grand cœur rose (couleur fixe), animation lors d'un cœur reçu, **compteur de cœurs non lus** ; le compteur revient à zéro lorsqu'ils sont consultés, tandis que l'historique éventuel demeure selon les règles à décider.
 - **VALIDÉ** : retrait d'un cœur autorisé ; conséquences en cas de match ou de conversation : **À DÉCIDER**.
+
+## Consentement, pause du radar et mode invisible
+- **VALIDÉ** : radar désactivé par défaut. En l'activant volontairement, A accepte que son profil Nearly soit proposé aux utilisateurs qu'elle croise et qui correspondent à ses préférences, dans les limites de ses paramètres de confidentialité. Ce consentement ne constitue pas un intérêt exprimé pour chaque personne ; seul un cœur volontaire exprime cet intérêt.
+- **VALIDÉ — radar en pause** : l'utilisateur n'est plus détectable et aucune nouvelle rencontre le concernant n'est créée. Les rencontres déjà proposées restent accessibles jusqu'à leur expiration normale de 24 heures, sauf blocage ou passage en mode invisible.
+- **VALIDÉ — mode invisible** : effet immédiat ; aucune nouvelle rencontre concernant l'utilisateur n'est créée et son profil devient inaccessible dans les rencontres potentielles déjà proposées. Ces découvertes sont révoquées, pas simplement masquées.
+- **VALIDÉ** : l'utilisateur peut réactiver sa visibilité à tout moment ; les rencontres révoquées ne réapparaissent pas automatiquement. Les règles de création d'une nouvelle rencontre lors d'un recroisement restent **À DÉCIDER**.
+- **VALIDÉ** : la pause du radar et le mode invisible préservent l'accès aux cœurs déjà envoyés et aux matchs existants, sauf blocage de la personne concernée, suppression du compte ou fonction de retrait spécifique. Les conséquences détaillées du retrait et le sort des cœurs/matchs à l'expiration des 24 heures restent **À DÉCIDER**.
+- **VALIDÉ** : une rencontre expirée ou devenue inaccessible ne permet plus de retrouver le profil concerné par cette rencontre. L'accès éventuellement autorisé dans le cadre d'un cœur ou d'un match est distinct de l'accès par découverte potentielle.
+- **VALIDÉ** : les profils sont accessibles uniquement aux utilisateurs autorisés dans le cadre de Nearly ; aucune position exacte ni historique de déplacements n'est affiché.
 
 ## Inscription et profil
 - **VALIDÉ** : inscription e-mail + Apple + Google.

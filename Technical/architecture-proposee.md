@@ -14,4 +14,14 @@
 
 Politique par défaut : RLS explicite, opérations sensibles serveur, pas de clé de service dans le client, pas d'accès direct transversal aux préférences ou aux événements de proximité, identifiants temporaires/non corrélables pour détection si pertinents, politiques de rétention et suppression testées.
 
-**Ne pas écrire les migrations définitives** avant de figer : exposition des profils, expiration 24 h, état des cœurs lus/retirés, réciprocité/match, bloqueurs et politique de conservation.
+## Contraintes métier validées à respecter
+Le consentement à la découverte est donné à l'activation volontaire du radar, désactivé par défaut, dans les limites des paramètres de confidentialité. La pause du radar interdit les nouvelles rencontres et la détectabilité sans révoquer les découvertes existantes ; le mode invisible interdit les nouvelles rencontres et révoque immédiatement l'accès au profil dans les découvertes existantes. La réactivation ne restaure pas les rencontres révoquées.
+
+Les accès par découverte potentielle doivent être distingués des accès autorisés par les cœurs déjà envoyés et les matchs existants, que la pause et l'invisibilité préservent sauf blocage, suppression du compte ou retrait spécifique. Une ancienne notification ou un lien conservé ne doit pas permettre de contourner l'expiration ou la révocation d'une rencontre.
+
+**Ne pas écrire les migrations définitives** avant de figer les points restants : paramètres détaillés de confidentialité, sort des cœurs/matchs à l'expiration des 24 h, état des cœurs lus/retirés, conséquences du retrait après match, blocage et politique de conservation.
+
+## Socle livré — mission 1
+React + TypeScript + Vite à la racine du dépôt ; React Router avec URLs à fragment pour l'hébergement statique. `src/app` contient le cadre et les routes, `src/features` les écrans, `src/design-system` les tokens sans dépendance et les composants web. `src/domain` est réservé et documenté, sans logique métier inventée.
+
+Le design system expose la palette officielle depuis TypeScript en variables CSS. Les vues web dépendent du DOM ; elles ne sont pas directement portables en React Native. Les tokens et le futur métier pourront être partagés. Aucun adaptateur de proximité, service distant, Supabase ou stockage utilisateur n'est encore implémenté. Les propositions précédentes restent non figées pour les missions suivantes.

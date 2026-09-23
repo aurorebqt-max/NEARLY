@@ -5,11 +5,19 @@
 2. A et B se croisent. Le service établit un **événement de proximité admissible** sans afficher de positions précises.
 3. Évaluation indépendante : `profil(B) correspond aux préférences(A)` puis `profil(A) correspond aux préférences(B)`.
 4. Si B correspond au type de A, **B** reçoit une suggestion anonyme (« Tu pourrais plaire à quelqu'un à proximité »). Si A correspond aussi au type de B, **A** peut recevoir sa propre suggestion ; regrouper les notifications simultanées.
-5. B ouvre sa suggestion avant son expiration (24 h) et consulte le profil de A **uniquement selon des règles d'exposition autorisées à fixer**.
+5. La notification ne révèle ni identité, ni photo, ni position exacte de A. B ouvre sa suggestion avant son expiration (24 h) et consulte le profil de A selon le consentement donné à l'activation du radar et les paramètres de confidentialité de A, sans autorisation supplémentaire par rencontre. Cette consultation ne notifie pas A. Un blocage ou le passage de A en mode invisible interdit cet accès.
 6. B choisit « Envoyer un cœur ». A reçoit l'alarme distinctive ; le compteur de cœurs **non lus** augmente ; A peut identifier B.
 7. A ouvre le cœur : celui-ci devient lu et n'entre plus dans le compteur. A peut envoyer un cœur en retour.
 8. Cœurs réciproques => match immédiat. Animation originale ; règles de messagerie à définir.
 9. Un utilisateur peut retirer un cœur ; définir précisément la machine à états correspondante avant codage.
+
+## Pause du radar et mode invisible (VALIDÉ)
+- Le radar est désactivé par défaut ; son activation est volontaire et autorise la découverte du profil dans les limites des paramètres de confidentialité.
+- Si A met son radar en pause, A n'est plus détectable et aucune nouvelle rencontre concernant A n'est créée. B conserve l'accès à une rencontre déjà proposée jusqu'à son expiration normale de 24 heures, sauf blocage ou passage de A en mode invisible.
+- Si A passe en mode invisible, aucune nouvelle rencontre concernant A n'est créée et B perd immédiatement l'accès au profil de A par les rencontres potentielles déjà proposées.
+- Si A réactive sa visibilité, les rencontres révoquées ne réapparaissent pas automatiquement. Le traitement d'un nouveau croisement reste à définir.
+- La pause et le mode invisible préservent l'accès aux cœurs déjà envoyés et aux matchs existants, sauf blocage, suppression du compte ou retrait spécifique. Cela ne tranche pas leur durée après expiration de la suggestion ni les conséquences détaillées du retrait.
+- Une rencontre expirée ou révoquée ne permet plus de retrouver le profil de A ; un accès autorisé par un cœur ou un match relève d'un cadre distinct.
 
 ## Cas à tester et à décider
 - A plaît à B mais B ne plaît pas à A ; la notification part **vers A** si `profil(A)` correspond à `préférences(B)` (vérifier le sens à chaque test).

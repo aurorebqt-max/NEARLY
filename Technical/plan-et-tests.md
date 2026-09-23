@@ -1,6 +1,6 @@
 # Plan de développement et validation
 
-## Phase 0 — conception (actuelle)
+## Phase 0 — conception (continue)
 Terminer le registre des décisions ; écrire machines à états, critères d'acceptation, politique de confidentialité et schémas de données. Préciser ce qui est non réalisable ou non validé sur iOS/Android.
 
 ## Phase 1 — preuve technique mobile (en parallèle du design)
@@ -19,12 +19,23 @@ Portage UI et modules réutilisables, véritable adapter de proximité selon fai
 Prototype séparé, opt-in, sans export de données de santé vers autrui ; expertise scientifique et juridique préalable.
 
 ## Cas d'acceptation minimum
-- Si `B correspond à A`, c'est **B** qui reçoit la suggestion ; A ne reçoit pas automatiquement de cœur.
+- Si `profil(B) correspond aux préférences(A)`, c'est **B** qui reçoit la suggestion ; tester indépendamment le sens inverse. A ne reçoit ni cœur automatique ni notification d'intérêt avant un cœur volontaire.
+- La suggestion ne révèle ni identité, ni photo, ni position exacte de A ; B peut découvrir son profil dans Nearly selon son consentement préalable et ses paramètres de confidentialité, sans autorisation par rencontre. La consultation ne notifie pas A.
 - Si B appuie sur cœur pour A, A reçoit l'alarme et son compteur **non lu** augmente de 1 ; une relecture n'incrémente rien.
 - À lecture, le compteur baisse ; cœur/historique ne disparaît pas seulement parce qu'il devient lu.
 - Deux cœurs réciproques créent **un seul** match, y compris en simultané.
 - Plusieurs événements proches produisent une notification regroupée, pas une rafale.
 - Une suggestion expire après 24 h ; le traitement des états liés doit suivre la règle encore à décider.
-- Blocage, désactivation radar, suppression du compte et refus des permissions empêchent les accès/notifs non autorisés.
+- Le radar est désactivé par défaut ; l'activation et le consentement sont volontaires.
+- Une pause du radar empêche la détectabilité et toute nouvelle rencontre concernant l'utilisateur, mais préserve l'accès aux rencontres déjà proposées jusqu'à leur expiration normale, sauf blocage ou mode invisible.
+- Le mode invisible empêche toute nouvelle rencontre concernant l'utilisateur et révoque immédiatement l'accès à son profil dans les rencontres potentielles déjà proposées. Une réactivation ne restaure pas ces rencontres.
+- Une rencontre expirée ou révoquée ne permet plus d'accéder au profil, y compris par une ancienne notification ou un lien conservé.
+- La pause et le mode invisible préservent l'accès aux cœurs déjà envoyés et aux matchs existants, sauf blocage, suppression du compte ou retrait spécifique ; ne pas confondre cet accès avec celui d'une rencontre potentielle.
+- Blocage, suppression du compte et refus des permissions empêchent les accès/notifs non autorisés selon le cadre concerné ; ne pas assimiler une pause du radar à une révocation des découvertes existantes.
 - Pas de liste de coordonnées ou de points représentant des personnes réelles sur le radar.
 - Tous les développements passent lint/typecheck/tests/build selon scripts disponibles et tests sur écran mobile.
+
+## Mission 1 — initialisation autorisée
+Le développement visuel démarre pendant la poursuite de la conception. Périmètre : socle React/TypeScript/Vite, palette officielle, bienvenue, animation originale, accueil temporaire et navigation vers des pages d'attente. Aucun algorithme ni radar n'est implémenté.
+
+Vérifications de ce socle : lint, TypeScript, build et parcours Playwright sur Chromium mobile, WebKit mobile et Chromium bureau ; liens, historique, rechargement, route inconnue, absence de débordement à 320 px et préférence de réduction des animations. Ces essais navigateur ne remplacent pas un essai sur téléphone physique. Le prototype natif de proximité demeure nécessaire avant toute promesse de détection réelle.

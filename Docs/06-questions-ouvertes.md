@@ -13,7 +13,12 @@
 - [ ] 18–35 ans : plage illustrative ou paramètre de départ ?
 
 ## Rencontres et sécurité
-- [ ] Profil découvert après suggestion : conditions de visibilité/consentement précises.
+- [x] Sens confirmé : si B correspond aux préférences de A, B reçoit la suggestion et peut découvrir A ; les deux directions sont indépendantes. Seul un cœur volontaire exprime un intérêt.
+- [x] Consentement préalable à l'activation volontaire du radar, désactivé par défaut ; découverte sans autorisation par rencontre, dans les limites des paramètres de confidentialité. Notification anonyme, aucune notification de consultation.
+- [x] Pause du radar : plus de nouvelles rencontres ni de détectabilité ; accès aux rencontres déjà proposées conservé jusqu'à expiration, sauf blocage ou mode invisible.
+- [x] Mode invisible : révocation immédiate de l'accès au profil dans les rencontres potentielles ; aucune nouvelle rencontre et aucune réapparition automatique des rencontres révoquées à la réactivation.
+- [x] Pause/invisibilité : accès aux cœurs déjà envoyés et matchs existants préservé, sauf blocage, suppression du compte ou retrait spécifique. Une rencontre expirée ou révoquée ne permet plus de retrouver un profil par cette rencontre.
+- [ ] Paramètres de confidentialité disponibles et effet de leur modification sur les rencontres déjà proposées.
 - [ ] Durée du cœur après expiration de suggestion 24 h ; retrait après match ; persistance des conversations.
 - [ ] « Lu » : au clic sur une notification, à l'ouverture de la liste ou du profil ?
 - [ ] Regroupement : durée, seuils, répétition, horaires silencieux.

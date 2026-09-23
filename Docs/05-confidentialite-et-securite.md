@@ -4,7 +4,12 @@
 
 ## Invariants produit
 - Adultes uniquement ; déclaration de naissance choisie pour l'inscription, **preuve de majorité non résolue**.
-- Radar opt-in (activation volontaire), désactivation immédiate, paramètres de notification ; modalités précises à valider.
+- Radar désactivé par défaut. Son activation volontaire vaut consentement préalable à la découverte du profil par les utilisateurs croisés correspondant aux préférences de la personne, dans les limites de ses paramètres de confidentialité, sans autorisation supplémentaire par rencontre.
+- Radar en pause : plus de détectabilité ni de nouvelles rencontres concernant l'utilisateur ; rencontres déjà proposées accessibles jusqu'à leur expiration normale de 24 heures, sauf blocage ou mode invisible.
+- Mode invisible : aucune nouvelle rencontre concernant l'utilisateur ; accès à son profil immédiatement révoqué dans les rencontres potentielles déjà proposées. Réactiver la visibilité ne restaure pas automatiquement ces rencontres.
+- La pause et le mode invisible préservent l'accès aux cœurs déjà envoyés et aux matchs existants, sauf blocage, suppression du compte ou retrait spécifique. Leur durée après expiration d'une suggestion et les conséquences détaillées du retrait restent à décider.
+- Une rencontre expirée ou révoquée ne donne plus accès au profil concerné. Les accès autorisés par un cœur ou un match sont distincts des accès par rencontre potentielle.
+- Notification de suggestion sans identité, photo ni position exacte ; aucune notification de consultation du profil, ni notification d'intérêt avant un cœur volontaire.
 - Pas de carte, pas de localisation précise ni de trajectoire historique exposées à d'autres utilisateurs.
 - Pas de révélation automatique de préférences intimes ; profils visibles uniquement selon des règles explicites de consentement.
 - Blocage, signalement, limitation des abus, suppression du compte et de ses données.

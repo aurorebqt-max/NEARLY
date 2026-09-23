@@ -6,7 +6,7 @@
 - Nombre central : **cœurs non lus**, et non tous les profils compatibles ni le cumul historique.
 - Une suggestion de proximité n'est **pas** l'alarme d'un cœur reçu.
 
-## Palette de travail (PROPOSÉE, modifiable)
+## Palette officielle (VALIDÉE — mission 1)
 - Nuit `#211323` ; rose `#D65B91` ; rose clair `#F5A8C7` ; lilas `#A65AB8` ; perle `#FFF5F9`.
 - Slogan de travail : *Closer than you think.*
 - Nom, logo, sons, animation et interface à créer **originaux** ; droits et marques à vérifier.
@@ -16,3 +16,12 @@
 
 ## Étanchéité visuelle
 Le radar doit être une **animation d'état**, pas une carte et pas des points géolocalisant d'autres personnes. Éviter distances précises, trajets ou présence nominative en temps réel. Les alertes et les listes ne doivent pas créer de possibilité de suivi par recoupement.
+
+## Design system livré — mission 1
+- Palette centralisée dans `src/design-system/tokens.ts`, exposée en variables CSS par l'adaptateur web.
+- Typographie : titres Georgia, texte avec polices système ; aucun téléchargement de police externe.
+- Composants réutilisables : cœur SVG original, icônes SVG originales, lien-bouton, carte de fonctionnalité future.
+- Boutons tactiles, focus clavier visible, lien d'évitement, zones sûres mobiles et respect de la préférence de réduction des animations.
+- L'animation du cœur de bienvenue est décorative ; elle ne représente pas la réception d'un cœur. Aucun compteur fictif n'est affiché.
+- Bienvenue et accueil navigables ; Rencontres, Cœurs et Profil sont des pages d'attente explicitement marquées « À venir ».
+- Les choix de composition et de typographie sont l'implémentation initiale proposée ; la palette est validée. Les autres écrans de l'inventaire restent à développer.
