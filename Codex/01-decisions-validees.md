@@ -1,0 +1,39 @@
+# 01 — Décisions validées (version de conception)
+
+Ce document sépare les **décisions produit** des préférences fictives citées comme exemples. Ne pas traiter les exemples « brun, bouclé, sportif » ou « Aurore/Lucas » comme des données personnelles de la fondatrice ou comme des valeurs par défaut.
+
+## Identité et intention
+- **VALIDÉ** : application originale de rencontre par proximité, nom de travail Nearly ; mélange visuel moderne et romantique.
+- **VALIDÉ** : ne pas imiter les actifs protégés ni le nom de la série *Love Alarm*.
+- **VALIDÉ** : pas de swipe type Tinder, notes publiques du physique, scores de beauté, cartes des personnes autour de soi, classement de popularité, notifications incessantes, fonctionnalités essentielles payantes, ou données de santé visibles par autrui.
+
+## Mécanique fondamentale, directionnelle
+- **VALIDÉ** : si le profil de **B** correspond aux préférences de **A** et qu'une rencontre admissible est détectée, **B** reçoit une première notification anonyme : « Tu pourrais plaire à quelqu'un à proximité. »
+- **VALIDÉ** : B peut ouvrir Nearly puis découvrir le profil de A, sous réserve de règles de visibilité/consentement **encore à finaliser**.
+- **VALIDÉ** : B peut envoyer volontairement un cœur à A ; **A** reçoit alors l'alarme emblématique et découvre l'identité de B.
+- **VALIDÉ** : si A envoie un cœur en retour, **match immédiat**. Les correspondances A→B et B→A sont évaluées indépendamment. Une simple compatibilité n'est pas un cœur.
+- **VALIDÉ** : rencontre potentielle disponible **24 heures** ; sort des cœurs et matchs une fois cette fenêtre expirée : **À DÉCIDER**.
+- **VALIDÉ** : plusieurs détections proches dans le temps sont regroupées intelligemment pour éviter des vibrations en rafale ; fenêtre de regroupement : **À DÉCIDER**.
+- **VALIDÉ** : grand cœur rose (couleur fixe), animation lors d'un cœur reçu, **compteur de cœurs non lus** ; le compteur revient à zéro lorsqu'ils sont consultés, tandis que l'historique éventuel demeure selon les règles à décider.
+- **VALIDÉ** : retrait d'un cœur autorisé ; conséquences en cas de match ou de conversation : **À DÉCIDER**.
+
+## Inscription et profil
+- **VALIDÉ** : inscription e-mail + Apple + Google.
+- **VALIDÉ** : accès destiné aux personnes de **18 ans et plus** ; date de naissance déclarée à l'inscription. Cela **ne constitue pas** à lui seul une vérification d'âge fiable ; approche de sûreté à définir avant lancement public.
+- **VALIDÉ** : **1 à 6 photos** ; **prénom affiché** ; profil de base + champs additionnels choisis par la personne.
+- **VALIDÉ** : description des caractéristiques physiques par l'utilisateur lui-même, sans analyse automatique de photos en première version.
+- **VALIDÉ** : intentions de rencontre prises en compte pour la compatibilité ; catégories et logique précise **À DÉCIDER**.
+
+## Préférences et apprentissage
+- **VALIDÉ** : questionnaire comprenant caractéristiques individuelles et portraits fictifs complets ; modes visuels exacts à préciser.
+- **VALIDÉ** : importance personnalisée des préférences physiques, distincte des critères essentiels (âge et genre recherchés).
+- **VALIDÉ** : équilibre entre physique et personnalité dans la correspondance ; pondération exacte **À DÉCIDER**.
+- **VALIDÉ** : apprentissage progressif avec validation des changements importants par l'utilisateur, jamais de modification silencieuse des critères essentiels.
+- **VALIDÉ** : plusieurs modes de découverte : habituel, découverte, événement ; modalités **À DÉCIDER**.
+- **VALIDÉ** : la réponse « Je préfère ne pas préciser pour le moment » pour les genres recherchés est un **report de réponse**, pas « tous les genres ». Le comportement de l'algorithme en cas de renseignement manquant est **À DÉCIDER**.
+- **CONTEXTE D'EXEMPLE, PAS DÉCISION PRODUIT** : tranche 18–35 ans fournie lors du questionnaire ; confirmer si c'est un réglage de démonstration ou une plage initiale souhaitée pour le produit. Ce n'est pas une restriction globale d'âge déjà validée.
+
+## Crush Sense / Heart Diary
+- **PROPOSÉ, NON PLANIFIÉ POUR LA PREMIÈRE VERSION** : journal privé, optionnel, pouvant rapprocher des rencontres d'événements physiologiques et de confirmations volontaires.
+- **PRINCIPE VALIDÉ DANS LES ÉCHANGES** : un BPM élevé ne prouve aucune attirance ; prendre en compte effort/contexte, éviter les notifications répétitives, ne pas attribuer une réaction à une personne sans confirmation, ne partager aucune donnée de santé avec d'autres utilisateurs.
+- Intégration Apple Health / montres, faisabilité, conformité, preuve scientifique : **À ÉTUDIER**, sans promesse de « détecteur de béguin ».
