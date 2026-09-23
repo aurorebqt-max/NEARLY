@@ -25,3 +25,13 @@ Le radar doit être une **animation d'état**, pas une carte et pas des points g
 - L'animation du cœur de bienvenue est décorative ; elle ne représente pas la réception d'un cœur. Aucun compteur fictif n'est affiché.
 - Bienvenue et accueil navigables ; Rencontres, Cœurs et Profil sont des pages d'attente explicitement marquées « À venir ».
 - Les choix de composition et de typographie sont l'implémentation initiale proposée ; la palette est validée. Les autres écrans de l'inventaire restent à développer.
+
+## Interface smartphone — mission 2
+- Présentation conservée : bienvenue à `/#/`, présentation des fonctionnalités à `/#/presentation`.
+- Application distincte à `/#/accueil`, `/#/rencontres`, `/#/coeurs`, `/#/profil`, toujours en une seule colonne verticale. Cadre centré sur iPad et ordinateur, sans interface tablette ou bureau spécifique.
+- Navigation immobilisée en bas du cadre ; seul le contenu central défile. Safe areas sur les quatre côtés via les variables d’environnement CSS ; validation physique encore à faire.
+- Accueil : grand cœur rose fixe, compteur de cœurs non lus fictifs. Le bouton de démonstration ajoute un exemple local (2 → 3) et déclenche une animation originale, sans changement de couleur. Revenir à l’écran ne rejoue pas une réception. Réduction des mouvements respectée.
+- Rencontres : exemples anonymes, ouverture locale d’un profil fictif, mention des 24 h et durées illustratives. Aucun délai réel, calcul de compatibilité ou expiration automatique.
+- Cœurs : expéditeurs fictifs identifiés. Aucun marquage automatique comme lu : le déclencheur métier est encore ouvert. L’envoi et le retour de cœur restent indisponibles.
+- Profil : personnage fictif, emplacements photo illustratifs, personnalisation et paramètres présentés mais inactifs. Les champs détaillés restent à décider.
+- Toutes les données sont des exemples de présentation, pas des valeurs par défaut pour les futurs comptes.

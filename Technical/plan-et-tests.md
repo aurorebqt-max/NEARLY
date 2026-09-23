@@ -39,3 +39,8 @@ Prototype séparé, opt-in, sans export de données de santé vers autrui ; expe
 Le développement visuel démarre pendant la poursuite de la conception. Périmètre : socle React/TypeScript/Vite, palette officielle, bienvenue, animation originale, accueil temporaire et navigation vers des pages d'attente. Aucun algorithme ni radar n'est implémenté.
 
 Vérifications de ce socle : lint, TypeScript, build et parcours Playwright sur Chromium mobile, WebKit mobile et Chromium bureau ; liens, historique, rechargement, route inconnue, absence de débordement à 320 px et préférence de réduction des animations. Ces essais navigateur ne remplacent pas un essai sur téléphone physique. Le prototype natif de proximité demeure nécessaire avant toute promesse de détection réelle.
+
+## Mission 2 — interface smartphone
+Vérifier les quatre rubriques en Chromium mobile et WebKit mobile, la conservation de la présentation, l’historique et les liens directs. Contrôler le défilement indépendant de la navigation, la largeur 320 px, le cadre vertical centré à 820 et 1440 px, le focus clavier et la réduction des mouvements.
+
+Le test du compteur vérifie 2 → 3 à l’ajout d’un cœur fictif, sa couleur rose constante, l’absence de marquage comme lu lors de la navigation, la liste d’expéditeurs cohérente et l’absence de nouvelle animation au retour à l’accueil. Les tests ne valident aucun backend ni mécanisme réel d’expiration/notification.

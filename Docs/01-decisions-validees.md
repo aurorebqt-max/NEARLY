@@ -3,6 +3,7 @@
 Ce document sépare les **décisions produit** des préférences fictives citées comme exemples. Ne pas traiter les exemples « brun, bouclé, sportif » ou « Aurore/Lucas » comme des données personnelles de la fondatrice ou comme des valeurs par défaut.
 
 ## Identité et intention
+- **VALIDÉ — mission 2** : Nearly est exclusivement destinée aux smartphones iPhone et Android, avec une interface verticale. React/Vite est un prototype de design pour Codespaces ; sur iPad et ordinateur, l’application est prévisualisée dans un cadre smartphone centré. La migration React Native n’est pas encore autorisée.
 - **VALIDÉ** : application originale de rencontre par proximité, nom de travail Nearly ; mélange visuel moderne et romantique.
 - **VALIDÉ** : ne pas imiter les actifs protégés ni le nom de la série *Love Alarm*.
 - **VALIDÉ** : pas de swipe type Tinder, notes publiques du physique, scores de beauté, cartes des personnes autour de soi, classement de popularité, notifications incessantes, fonctionnalités essentielles payantes, ou données de santé visibles par autrui.

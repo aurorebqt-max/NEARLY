@@ -1,6 +1,6 @@
 # NEARLY ♡
 
-**Statut : mission 1 — premier aperçu web.** Application React + TypeScript + Vite avec bienvenue animée, accueil de présentation et navigation. Les comptes, rencontres, cœurs et réglages ne sont pas encore implémentés. Le cahier des charges reste vivant ; seules les règles validées peuvent être développées. Voir [PROGRESS.md](PROGRESS.md) pour reprendre le travail.
+**Statut : mission 2 — prototype d’interface smartphone.** Nearly cible exclusivement les smartphones iPhone et Android. React/Vite sert à tester le design dans Codespaces, avec un cadre smartphone centré sur iPad et ordinateur. Les quatre rubriques utilisent des données fictives. Aucune fonctionnalité de rencontre réelle ni migration React Native n’est implémentée. Voir [PROGRESS.md](PROGRESS.md) pour reprendre le travail.
 
 > Nom provisoire : **Nearly** — « Closer than you think. » Disponibilité du nom/de la marque/du domaine non vérifiée. Ne pas copier les visuels, sons ou interface de *Love Alarm*.
 
@@ -31,7 +31,7 @@ npm run dev
 
 Ouvrir http://localhost:5173. Dans Codespaces, ouvrir le port **5173** depuis l'onglet Ports ; sur téléphone, ouvrir son URL HTTPS transférée, avec le compte GitHub autorisé si le port est privé. Depuis une machine locale, sur le même réseau Wi-Fi, utiliser `http://ADRESSE_IP_DE_LA_MACHINE:5173` (pare-feu autorisant le port). Le serveur écoute sur `0.0.0.0`.
 
-Le bouton « Découvrir Nearly » ouvre l'accueil. La navigation fonctionne ; les rubriques futures sont signalées comme telles. Le routage par fragment (`/#/accueil`) permet de recharger et de partager les pages sans réécriture côté hébergeur.
+Le bouton « Découvrir Nearly » ouvre l’interface smartphone. Les quatre rubriques sont navigables : Accueil, Rencontres, Cœurs et Profil. La présentation d’origine reste à `/#/` et `/#/presentation`. Sur Accueil, « Simuler un cœur reçu » ajoute un exemple fictif et anime le compteur. Les exemples se réinitialisent au rechargement ou à la sortie de l’interface smartphone. Le routage par fragment (`/#/accueil`) permet de recharger et de partager les pages sans réécriture côté hébergeur.
 
 ## Vérifications
 ```sh
@@ -46,7 +46,9 @@ Playwright peut demander des bibliothèques système supplémentaires sur une no
 
 ## Structure
 - `src/app/` : navigation et cadre de l'application web.
-- `src/features/` : écrans regroupés par fonctionnalité.
+- `src/features/mobile/` : les quatre écrans smartphone et leurs composants communs.
+- `src/features/demo/` : données fictives TypeScript et contexte de démonstration en mémoire.
+- `src/features/welcome/`, `src/features/home/` : présentation existante conservée.
 - `src/design-system/` : tokens TypeScript, styles et composants visuels.
 - `src/domain/` : emplacement documenté pour le futur métier indépendant de l'interface ; aucune règle implémentée à ce stade.
 - `tests/` : parcours navigateur et contrôles responsive.

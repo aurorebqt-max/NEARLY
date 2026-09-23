@@ -25,3 +25,10 @@ Les accès par découverte potentielle doivent être distingués des accès auto
 React + TypeScript + Vite à la racine du dépôt ; React Router avec URLs à fragment pour l'hébergement statique. `src/app` contient le cadre et les routes, `src/features` les écrans, `src/design-system` les tokens sans dépendance et les composants web. `src/domain` est réservé et documenté, sans logique métier inventée.
 
 Le design system expose la palette officielle depuis TypeScript en variables CSS. Les vues web dépendent du DOM ; elles ne sont pas directement portables en React Native. Les tokens et le futur métier pourront être partagés. Aucun adaptateur de proximité, service distant, Supabase ou stockage utilisateur n'est encore implémenté. Les propositions précédentes restent non figées pour les missions suivantes.
+
+## Séparation présentation / prototype smartphone — mission 2
+`PresentationShell` conserve les pages de présentation. `PhoneShell` gère uniquement le cadre smartphone, sa navigation et l’état local de démonstration. Les écrans de `src/features/mobile` consomment les données fictives via `src/features/demo`, sans accès réseau ou persistance. Un rechargement ou une sortie de l’interface smartphone réinitialise la démonstration.
+
+Les fixtures et les tokens sont du TypeScript indépendant du DOM. Le contexte React de démonstration n’est pas un moteur métier ni le stockage prévu pour la production. Les composants `ScreenHeading`, `Avatar`, `PersonPreview`, `UnavailableButton` et le cœur sont réutilisés entre les écrans.
+
+La future application cible exclusivement iPhone/Android. Le cadre navigateur et ses safe areas CSS appartiennent à l’adaptateur web ; ils seront remplacés par des vues, une navigation et une gestion des safe areas natives. Aucune dépendance ni migration React Native n’est ajoutée dans cette mission.
