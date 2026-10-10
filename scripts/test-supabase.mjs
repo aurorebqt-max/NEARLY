@@ -59,7 +59,13 @@ try {
     await ok(client.auth.signInWithPassword({ email, password }));
     assert.deepEqual((await snapshot(client)).preferences[created.user.id], preferences);
   }
-  console.log('PASS Auth, profile, preferences, private uploads, no fixture contamination');
+  const signupClient = createClient(url, publicKey, { auth: { persistSession: false } });
+  const signedUp = await ok(signupClient.auth.signUp({ email: `nearly-signup-${crypto.randomUUID()}@example.test`, password: crypto.randomUUID() + 'Aa9!' }));
+  assert.ok(signedUp.user); users.push(signedUp.user.id);
+  assert.ok(signedUp.session, 'Local Auth uses email confirmations disabled');
+  assert.equal((await snapshot(signupClient)).profiles.length, 1);
+  await ok(signupClient.auth.signOut());
+  console.log('PASS Auth signup/signin, profile, preferences, private uploads, no fixture contamination');
   const [a,b,c] = clients; const [aid,bid,cid] = users;
   assert.equal((await ok(b.from('profiles').select('*'))).length,1);
   assert.equal((await ok(b.from('preferences').select('*'))).length,1);

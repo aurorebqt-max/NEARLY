@@ -1,6 +1,6 @@
 # Nearly — progression et reprise
 
-Mise à jour : **10 octobre 2026**. Sprint fonctionnel autorisé sur les dix blocs ; mission 4 terminée pour le périmètre local/mock demandé. Design Romantic Future / Romantic Tech Premium conservé.
+Mise à jour : **10 octobre 2026**. Sprint 2 Supabase repris et validé en local ; mode local/mock, laboratoire et design conservés. Aucun nouveau sprint engagé.
 
 ## Sprint 2 — reprise Supabase du 10 octobre 2026
 
@@ -12,7 +12,18 @@ Migrations conservées : `202610100001_nearly.sql` et `202610100002_photos.sql`.
 
 À la reprise, aucun conteneur, volume ou image Docker ; ancien journal `/tmp/nearly-supabase-start.log` absent. Le téléchargement a saturé le disque et empêché PostgreSQL de démarrer (ENOSPC). Stockage Docker déplacé intégralement vers `/tmp/nearly-docker-data`, montage conservé à `/var/lib/docker`, sans purge de fichiers ou volumes. Attention : `/tmp` est éphémère dans cet environnement. Journaux : `/tmp/nearly-supabase-resume.log` et `/tmp/nearly-supabase-resume-2.log`.
 
-Validation en cours : test existant raccordé à `npm run test:supabase`, imports Node explicites pour ESLint, assertions sur migrations/RLS/persistance et données invalides. Lint et typecheck passés ; tests d'intégration en cours. Premier build bloqué par le disque plein, à relancer.
+Corrections et ajouts de reprise :
+- Tests existants raccordés à `npm run test:supabase`, imports Node corrigés, assertions migrations/RLS/inscription publique/persistance après reconnexion et données invalides ajoutées.
+- Parcours navigateur réel ajouté (`npm run test:supabase:ui`) : connexion, photo décodée/réencodée et téléversée, profil, préférences, rechargement, déconnexion/reconnexion, retour à la démo.
+- Client Supabase unique pour éviter les instances Auth concurrentes sous React StrictMode. Libellés connexion/profil/signalement adaptés au mode réel.
+- Redirections Auth alignées sur Vite (5173, preview 4173, test 5175), mot de passe minimum 8 caractères, seed automatique désactivé (aucun seed de fixtures).
+- `.env.local` créé avec URL et clé publique locales uniquement ; ignoré par Git, mode local conservé par défaut. README et `Docs/09-supabase.md` actualisés.
+
+Validation : deux migrations initiales appliquées sans réécriture ; `migration list --local` confirme leurs versions, `db lint --local` ne trouve aucune erreur SQL. Les 14 tables ont RLS et politiques, vérifiées en base et par tests intercomptes. Suite Supabase API et parcours navigateur passés. Lint, typecheck, build, 54 tests application et 2 tests laboratoire passés ; validation finale relancée après les dernières corrections.
+
+Diagnostic environnement résolu : ACL par défaut de `/tmp` corrigée sur le stockage Docker déplacé (racines de snapshots restaurées en 0755), puis mode iptables legacy rétabli pour éliminer le conflit legacy/nft empêchant Realtime de joindre PostgreSQL. Le démarrage a ensuite appliqué les migrations normalement. Aucun reset de base ni réécriture des migrations. Les démarrages ratés ont automatiquement nettoyé leurs conteneurs/volumes initiaux vides ; aucune donnée applicative préexistante n'était présente dans cet environnement. Journal réussi : `/tmp/nearly-supabase-final-start.log` (peut contenir des clés locales, ne pas publier).
+
+Sauvegarde intermédiaire : `6ef9556` poussé sur `origin/main`.
 
 Limites : aucun projet hébergé connecté ; croisements par fixture administrative de test uniquement ; Apple/Google, notifications, modération humaine et suppression autonome du compte distant non implémentés. Vérification d'identité simulée sans badge fiable. Les sections suivantes conservent le bilan historique du mode local.
 

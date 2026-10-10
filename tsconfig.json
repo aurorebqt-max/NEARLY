@@ -27,6 +27,8 @@
     "vite.config.ts",
     "playwright.config.ts",
     "tests-dev",
+    "tests-backend",
+    "playwright.supabase.config.ts",
     "playwright.lab.config.ts"
   ]
 }

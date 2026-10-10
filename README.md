@@ -1,6 +1,6 @@
 # NEARLY ♡
 
-**Statut : Sprint 2 Supabase en validation — mode local conservé.** Nearly reste exclusivement pensée pour smartphone, avec un cadre vertical sur ordinateur. Cinq onglets, onboarding local, profil éditable, questionnaire, compatibilité directionnelle, cœurs/matchs et messagerie fonctionnent avec des données de démonstration persistantes. Adaptateur Supabase implémenté pour les comptes et interactions ; aucune détection réelle. Voir [PROGRESS.md](PROGRESS.md) et [le bilan fonctionnel du sprint](Docs/07-sprint-prototype-local.md).
+**Statut : Sprint 2 Supabase validé en local — mode local conservé.** Nearly reste exclusivement pensée pour smartphone, avec un cadre vertical sur ordinateur. Cinq onglets, onboarding local, profil éditable, questionnaire, compatibilité directionnelle, cœurs/matchs et messagerie fonctionnent avec des données de démonstration persistantes. Adaptateur Supabase implémenté pour les comptes et interactions ; aucune détection réelle. Voir [PROGRESS.md](PROGRESS.md) et [le bilan fonctionnel du sprint](Docs/07-sprint-prototype-local.md).
 
 > Nom provisoire : **Nearly** — « Closer than you think. » Disponibilité du nom/de la marque/du domaine non vérifiée. Ne pas copier les visuels, sons ou interface de *Love Alarm*.
 
@@ -73,6 +73,7 @@ npx supabase status
 # Seulement si les services sont arrêtés :
 npx supabase start
 npm run test:supabase
+npm run test:supabase:ui
 ```
 
 Configurer `.env.local` à partir de `.env.example` avec l'URL et la clé publique, puis redémarrer Vite. Jamais de clé secrète/service_role dans une variable `VITE_`. Ne pas réinitialiser la base pour reprendre une session.

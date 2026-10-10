@@ -22,12 +22,20 @@ Photos : bucket privé, chemins UUID par propriétaire, 1–6 photos référenc�
 
 ## Tests dédiés
 
-`npm run test:supabase` exige Docker et Supabase local démarrés. Le script refuse une API distante, lit les clés en mémoire sans les afficher et crée trois comptes uniques. Seuls ces comptes et leurs photos temporaires sont nettoyés ; aucune donnée préexistante n'est ciblée.
+`npm run test:supabase` exige Docker et Supabase local démarrés. Le script refuse une API distante, lit les clés en mémoire sans les afficher et crée quatre comptes uniques (dont une inscription publique). Seuls ces comptes et leurs photos temporaires sont nettoyés ; aucune donnée préexistante n'est ciblée.
 
 Couverture : migrations et 14 tables/RLS, authentification/reconnexion, profils/préférences persistants, photos privées, isolation intercomptes, anonymat des rencontres, cœurs concurrents, match unique, messages idempotents et compteurs indépendants, blocage/déblocage/signalement, absence de badge fiable auto-attribué. Rencontres injectées par un client administratif local, jamais par le navigateur.
 
-Validation de bloc : lint, typecheck, build, `npm test`, `npm run test:lab`, `npm run test:supabase`.
+`npm run test:supabase:ui` démarre Vite sur 5175 avec les variables publiques locales en mémoire et vérifie le parcours mobile complet (connexion, profil, vraie photo, préférences, session et retour démo). Son compte est créé et nettoyé séparément ; aucun fichier de trace contenant une session n'est enregistré.
+
+Validation de bloc : lint, typecheck, build, `npm test`, `npm run test:lab`, `npm run test:supabase`, `npm run test:supabase:ui`. Les deux migrations sont appliquées et `npx supabase db lint --local` ne signale aucune erreur.
 
 ## Limites
 
 Aucun déploiement distant. Messages par polling toutes les 10 secondes et au retour au premier plan, sans push. Pas de génération automatique de croisements serveur, Bluetooth, géolocalisation, santé ou reconnaissance faciale. Apple/Google non raccordés. Vérification simulée. Signalements persistants, traitement humain à organiser. Suppression autonome du compte distant non implémentée et annoncée comme telle dans l'interface. Questions produit inchangées, aucune politique définitive de conservation/anti-abus ajoutée.
+
+## Environnement de reprise
+
+Le Docker de cette session était vide. Le disque s'est rempli au téléchargement : les fichiers Docker ont été déplacés vers `/tmp/nearly-docker-data`, monté sur `/var/lib/docker`. Les ACL héritées de `/tmp` puis le conflit iptables legacy/nft ont été corrigés. Les services ont ensuite démarré et les migrations se sont appliquées sans reset. Ce montage et `/tmp` sont propres à cette session : ils ne constituent pas une sauvegarde durable des données. Les migrations et tests sont sauvegardés dans Git ; aucun projet distant n'est configuré.
+
+Le `.env.local` préparé conserve `VITE_BACKEND_MODE=local`. Sur `/#/connexion`, « Utiliser le backend réel » ouvre l'authentification Supabase. Les confirmations e-mail sont désactivées uniquement dans la configuration locale. Pour un projet hébergé, configurer explicitement les URL autorisées et l'envoi/confirmation des e-mails avant usage.
