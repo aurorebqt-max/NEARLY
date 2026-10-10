@@ -1,1 +1,1 @@
-export function VerifiedBadge() { return <span className="verified-badge" title="Statut fictif, aucune vérification d’identité réelle"><span aria-hidden="true">♡✓</span> Profil vérifié · démo</span>; }
+export function VerifiedBadge({ simulated = true }: { simulated?: boolean }) { return <span className="verified-badge" title={simulated ? "Statut simulé, aucune vérification d’identité réelle" : "Profil vérifié"}><span aria-hidden="true">♡✓</span> Profil vérifié{simulated ? ' · démo' : ''}</span>; }

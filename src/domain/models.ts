@@ -7,7 +7,7 @@ export type AttractionPreferences = {
   personality: PersonalityPreferences; portraits: string[];
 };
 export type UserProfile = {
-  id: string; name: string; birthDate: string; bio: string; gender: string; intention: string;
+  id: string; name: string; birthDate: string; age?: number; verificationSimulated?: boolean; bio: string; gender: string; intention: string;
   photos: string[]; interests: string[]; personality: string[]; traits: PhysicalTraits;
   verified: boolean; radar: boolean; invisible: boolean; onboarded: boolean;
 };
