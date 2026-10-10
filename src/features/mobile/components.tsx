@@ -17,13 +17,14 @@ export function UnavailableButton({ children }: { children: ReactNode }) {
 
 /** Decorative, original vector portrait for fictional preview cards. */
 export function Portrait({ name }: { name: string }) {
+  const variant = [...name].reduce((n, c) => n + c.charCodeAt(0), 0) % 3;
   return <svg className="portrait-art" viewBox="0 0 320 360" role="img" aria-label={`Illustration fictive de ${name}`}>
     <rect width="320" height="360" fill="#3b2540" />
     <circle cx="252" cy="100" r="115" fill="#A65AB8" opacity=".22" />
     <path d="M0 310Q140 155 320 270V360H0Z" fill="#F5A8C7" opacity=".12" />
-    <ellipse cx="157" cy="377" rx="116" ry="145" fill="#A65AB8" />
+    <ellipse cx="157" cy="377" rx="116" ry="145" fill={["#A65AB8", "#D65B91", "#75516c"][variant]} />
     <path d="M134 211H182V268Q155 285 130 261Z" fill="#D69C9F" />
-    <ellipse cx="156" cy="160" rx="62" ry="84" fill="#E9B3AD" />
+    <ellipse cx="156" cy="160" rx="62" ry="84" fill={["#E9B3AD", "#C28F76", "#8F605C"][variant]} />
     <path d="M92 175Q57 62 149 62Q237 48 225 175L208 155L198 111Q146 143 105 119Z" fill="#211323" />
     <path d="M135 187Q155 200 175 186" fill="none" stroke="#995866" strokeWidth="3" strokeLinecap="round" />
     <path d="M124 158H137M177 158H189" stroke="#553347" strokeWidth="4" strokeLinecap="round" />

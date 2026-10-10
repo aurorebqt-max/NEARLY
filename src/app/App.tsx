@@ -12,6 +12,8 @@ import { routes } from './routes';
 import { StoreProvider } from '../state/store';
 import { MessagesPage, ConversationPage } from '../features/messaging/MessagesPage';
 import { TrustPage, VerificationPage } from '../features/trust/TrustPages';
+import { AuthPage } from '../features/account/AuthPage';
+import { QuestionnairePage } from '../features/account/QuestionnairePage';
 import './sprint.css';
 import './phone.css';
 import './romantic-future.css';
@@ -39,6 +41,7 @@ export function App() {
       <Route path={routes.home} element={<DashboardPage />} />
       <Route path={routes.encounters} element={<EncountersPage />} />
       <Route path={routes.hearts} element={<HeartsPage />} />
+      <Route path="/connexion" element={<AuthPage />} /><Route path="/questionnaire" element={<QuestionnairePage />} />
       <Route path="/messages" element={<MessagesPage />} /><Route path="/messages/:id" element={<ConversationPage />} /><Route path="/confiance/:slug" element={<TrustPage />} /><Route path="/verification" element={<VerificationPage />} />
       <Route path={routes.profile} element={<ProfilePage />} />
     </Route>
