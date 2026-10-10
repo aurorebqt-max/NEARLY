@@ -31,5 +31,5 @@ export function block(s: LocalState, a: string, b: string) {
 export function sendMessage(s: LocalState, conversationId: string, text: string) {
   const c = s.conversations.find(c => c.id === conversationId && c.members.includes(s.active));
   if (!c || blocked(s, c.members[0], c.members[1]) || !text.trim() || text.length > 2000) return;
-  c.messages.push({ id: crypto.randomUUID(), from: s.active, text: text.trim(), at: Date.now(), read: true });
+  c.messages.push({ id: crypto.randomUUID(), from: s.active, text: text.trim(), at: Date.now(), read: false });
 }

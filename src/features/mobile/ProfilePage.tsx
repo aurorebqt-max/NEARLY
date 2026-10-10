@@ -6,7 +6,7 @@ import { logout } from '../../services/auth';
 import { setVisibility } from '../../services/social';
 import { ProfileFields } from '../account/Fields';
 import { VerifiedBadge } from '../trust/VerifiedBadge';
-import { trustPages } from '../trust/TrustPages';
+import { trustPages } from '../../data/trust';
 import { Portrait, ScreenHeading } from './components';
 export function ProfilePage() {
   const { state } = useStore();

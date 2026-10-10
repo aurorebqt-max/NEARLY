@@ -1,24 +1,11 @@
-import { people, sampleProfile } from '../demo/fixtures';
 import { useState } from 'react';
-import { Icon } from '../../design-system/components/Icon';
-import { useDemo } from '../demo/demoContext';
-import { ScreenHeading, PersonPreview, UnavailableButton, EmptyState, Avatar, SignalDivider } from './components';
+import { Link } from 'react-router-dom';
+import { useStore } from '../../state/store';
+import { blocked, pairKey, sendHeart } from '../../services/social';
+import { ageAt } from '../../domain/compatibility';
+import { ScreenHeading, PersonPreview, EmptyState } from './components';
 export function HeartsPage() {
-  const { hearts, unread } = useDemo();
-  const [empty, setEmpty] = useState(false);
-  return <section className="mobile-screen">
-    <ScreenHeading eyebrow="QUELQU’UN A FAIT LE PREMIER PAS" title="Vos cœurs">Un cœur, c’est un intérêt choisi.</ScreenHeading>
-    <div className="hearts-total"><span aria-hidden="true">{unread}</span><div><strong>Cœurs non lus</strong><p>Des intérêts volontairement exprimés.<br />Exemples fictifs.</p></div></div>
-    <button className="preview-switch" aria-pressed={empty} onClick={() => setEmpty(value => !value)}>{empty ? 'Revoir les cœurs fictifs' : 'Voir l’état vide (démo)'}</button>
-    <div className="list-summary"><h2>Cœurs reçus</h2><span>{unread} non lus · fictifs</span></div>
-    <div className="mobile-list">{empty ? <EmptyState title="Une place pour le premier cœur.">Un intérêt se choisit. Les cœurs reçus apparaîtront ici, avec le prénom de leur expéditeur.</EmptyState> : hearts.map(heart => <article className="received-card" data-new={heart.id === 'heart-example'} key={heart.id}>
-      <span className="unread-tag">Cœur non lu · exemple</span>
-      <PersonPreview person={heart.sender} />
-      <p className="heart-caption">{heart.sender.name} vous a envoyé un cœur fictif.</p>
-      <UnavailableButton>Envoyer un cœur en retour</UnavailableButton>
-    </article>)}</div>
-    <SignalDivider />
-    <details className="match-preview"><summary>Aperçu d’un match fictif</summary><div className="match-scene"><span className="eyebrow">DÉMONSTRATION VISUELLE</span><div className="match-pair"><Avatar person={sampleProfile} /><Icon name="heart" /><Avatar person={people[0]} /></div><h2>Le même élan.</h2><p>Deux cœurs volontaires, un match réciproque.</p><span>Aucun match n’est créé dans cet aperçu.</span></div></details>
-    <p className="screen-note">La consultation ne change pas le compteur dans cette démo. Le geste qui marquera un cœur comme lu reste à définir.</p>
-  </section>;
+  const { state, update } = useStore(); const [empty, setEmpty] = useState(false);
+  const hearts = state.hearts.filter(h => h.to === state.active && !blocked(state, h.from, h.to)); const unread = hearts.filter(h => !h.read).length;
+  return <section className="mobile-screen"><ScreenHeading eyebrow="QUELQU’UN A FAIT LE PREMIER PAS" title="Vos cœurs">Un cœur, c’est un intérêt choisi.</ScreenHeading><div className="hearts-total"><span>{unread}</span><div><strong>Cœurs non lus</strong><p>Des intérêts volontairement exprimés.</p></div></div><p className="screen-note">Démo : lecture explicite par bouton, conservation après 24 h. Règles finales encore ouvertes.</p><button className="preview-switch" onClick={() => setEmpty(!empty)}>{empty ? 'Revoir les cœurs fictifs' : 'Voir l’état vide (démo)'}</button><div className="mobile-list">{empty || !hearts.length ? <EmptyState title="Une place pour le premier cœur.">Les cœurs reçus apparaîtront ici.</EmptyState> : hearts.map(h => { const p = state.profiles.find(p => p.id === h.from)!; const match = state.conversations.find(c => c.id === pairKey(h.from, h.to)); return <article className="received-card" key={h.id}><span className="unread-tag">{h.read ? 'Cœur lu' : 'Cœur non lu'}</span><PersonPreview person={{ ...p, age: ageAt(p.birthDate) }} />{!h.read && <button className="outline-button" onClick={() => update(s => { s.hearts.find(x => x.id === h.id)!.read = true; })}>Marquer comme lu</button>}{match ? <><h2>Le même élan.</h2><Link className="outline-button" to={'/messages/' + match.id}>Ouvrir la conversation</Link></> : <button className="outline-button" onClick={() => update(s => sendHeart(s, s.active, h.from))}>Envoyer un cœur en retour</button>}</article>; })}</div><details><summary>Mes cœurs envoyés</summary>{state.hearts.filter(h => h.from === state.active && !blocked(state, h.from, h.to)).map(h => <div key={h.id}><p>{state.profiles.find(p => p.id === h.to)?.name}</p>{state.conversations.some(c => c.id === pairKey(h.from, h.to)) ? <p className="screen-note">Retrait après match : non proposé dans la démo, décision ouverte.</p> : <button className="outline-button" onClick={() => update(s => { s.hearts = s.hearts.filter(x => x.id !== h.id); })}>Retirer ce cœur</button>}</div>)}</details></section>;
 }

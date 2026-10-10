@@ -10,7 +10,7 @@ test('presentation is preserved and smartphone navigation works', async ({ page 
   await expect(page.getByText('DÉMO FICTIVE')).toBeVisible();
   await expect(page.getByRole('status')).toContainText('2 cœurs non lus');
   await page.screenshot({ path: testInfo.outputPath('home.png') });
-  for (const [label, title] of [['Rencontres', 'Rencontres'], ['Cœurs', 'Vos cœurs'], ['Profil', 'Votre profil']]) {
+  for (const [label, title] of [['Rencontres', 'Rencontres'], ['Cœurs', 'Vos cœurs'], ['Messages', 'Messages'], ['Profil', 'Votre profil']]) {
     const link = page.getByRole('navigation').getByRole('link', { name: label, exact: true });
     await link.click();
     await expect(link).toHaveAttribute('aria-current', 'page');
@@ -26,7 +26,7 @@ test('presentation is preserved and smartphone navigation works', async ({ page 
   await page.reload();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Votre profil');
   await page.goBack();
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Vos cœurs');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Messages');
   await page.getByRole('navigation').getByRole('link', { name: 'Accueil', exact: true }).click();
   await page.getByRole('link', { name: 'Revoir la présentation de Nearly' }).click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Place aux possibles.');
@@ -44,13 +44,13 @@ test('fictional hearts stay unread and animation only starts on increase', async
   await expect(page.locator('.nearly-heart')).toHaveCSS('color', 'rgb(214, 91, 145)');
   await page.getByRole('navigation').getByRole('link', { name: 'Cœurs', exact: true }).click();
   for (const name of ['Lucas', 'Noah', 'Sacha']) await expect(page.getByRole('heading', { name: new RegExp(name) })).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Envoyer un cœur en retour' }).first()).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Envoyer un cœur en retour' }).first()).toBeEnabled();
   await page.getByRole('navigation').getByRole('link', { name: 'Accueil', exact: true }).click();
   await expect(page.getByRole('status')).toContainText('3 cœurs non lus');
   await expect(page.locator('.unread-heart')).toHaveAttribute('data-received', 'false');
   await expect(page.getByRole('button', { name: 'Cœur fictif ajouté' })).toBeDisabled();
   await page.reload();
-  await expect(page.getByRole('status')).toContainText('2 cœurs non lus');
+  await expect(page.getByRole('status')).toContainText('3 cœurs non lus');
 });
 
 test('suggestions are anonymous until a fictional profile is opened', async ({ page }) => {
@@ -59,7 +59,7 @@ test('suggestions are anonymous until a fictional profile is opened', async ({ p
   await expect(page.getByRole('heading', { name: /Noah/ })).toHaveCount(0);
   await page.getByRole('button', { name: 'Découvrir le profil fictif 1' }).click();
   await expect(page.getByRole('heading', { name: 'Noah, 29 ans' })).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Envoyer un cœur', exact: false })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Envoyer un cœur', exact: false })).toBeEnabled();
 });
 
 test('320px, reduced motion, keyboard and unknown route', async ({ page }) => {
@@ -73,7 +73,7 @@ test('320px, reduced motion, keyboard and unknown route', async ({ page }) => {
   await expect(page.getByRole('main')).toBeFocused();
   await page.getByRole('button', { name: 'Simuler un cœur reçu' }).click();
   await expect(page.locator('.nearly-heart')).toHaveCSS('animation-name', 'none');
-  for (const label of ['Accueil', 'Rencontres', 'Cœurs', 'Profil']) {
+  for (const label of ['Accueil', 'Rencontres', 'Cœurs', 'Messages', 'Profil']) {
     await page.getByRole('navigation').getByRole('link', { name: label, exact: true }).click();
     expect(await page.locator('.phone-content').evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
     await expect(page.getByRole('navigation')).toBeInViewport();
@@ -105,8 +105,8 @@ test('empty and reciprocal match previews do not change unread hearts', async ({
   await page.getByRole('navigation').getByRole('link', { name: 'Cœurs', exact: true }).click();
   await page.getByRole('button', { name: 'Voir l’état vide (démo)' }).click();
   await expect(page.getByRole('heading', { name: 'Une place pour le premier cœur.' })).toBeVisible();
-  await page.getByText('Aperçu d’un match fictif', { exact: true }).click();
-  await expect(page.getByText('Aucun match n’est créé dans cet aperçu.')).toBeVisible();
+  await page.getByRole('button', { name: 'Revoir les cœurs fictifs' }).click();
+  await expect(page.getByRole('link', { name: 'Ouvrir la conversation' })).toBeVisible();
   await page.getByRole('navigation').getByRole('link', { name: 'Accueil', exact: true }).click();
   await expect(page.getByRole('status')).toContainText('2 cœurs non lus');
 });
@@ -120,7 +120,7 @@ test('larger phones, safe area allowances and comfortable touch navigation', asy
       (el as HTMLElement).style.setProperty('--safe-bottom', '34px');
     });
     await expect(page.locator('.phone-nav')).toHaveCSS('padding-bottom', '46px');
-    for (const label of ['Accueil', 'Rencontres', 'Cœurs', 'Profil']) {
+    for (const label of ['Accueil', 'Rencontres', 'Cœurs', 'Messages', 'Profil']) {
       const link = page.getByRole('navigation').getByRole('link', { name: label, exact: true });
       await link.click();
       const box = await link.boundingBox();

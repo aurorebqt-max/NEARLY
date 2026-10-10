@@ -1,23 +1,12 @@
-import { useState } from 'react';
-import { sampleEncounters } from '../demo/fixtures';
-import { Avatar, EmptyState, PersonPreview, ScreenHeading, UnavailableButton, SignalDivider } from './components';
+import { useEffect, useState } from 'react';
+import { useStore } from '../../state/store';
+import { accessible, sendHeart } from '../../services/social';
+import { ageAt } from '../../domain/compatibility';
+import { ScreenHeading, Avatar, PersonPreview, EmptyState } from './components';
 export function EncountersPage() {
-  const [revealed, setRevealed] = useState<string[]>([]);
-  const [empty, setEmpty] = useState(false);
-  return <section className="mobile-screen">
-    <ScreenHeading eyebrow="DES CHEMINS QUI SE CROISENT" title="Rencontres">Vous pourriez plaire à quelqu’un.</ScreenHeading>
-    <p className="info-strip">Une rencontre potentielle est disponible 24 heures.</p>
-    <p className="screen-note">Suggestions et durées fictives, sans décompte réel. Une suggestion n’est pas un cœur.</p>
-    <button className="preview-switch" aria-pressed={empty} onClick={() => setEmpty(value => !value)}>{empty ? "Revoir les suggestions fictives" : "Voir l’état vide (démo)"}</button>
-    {empty ? <EmptyState title="Le prochain croisement reste à écrire.">Vos rencontres potentielles apparaîtront ici. Pour le moment, prenez le temps de vivre.</EmptyState> : <div className="mobile-list">{sampleEncounters.map((encounter, index) => <article className="encounter-card" key={encounter.id}>
-      <div className="card-top"><span className="eyebrow">RENCONTRE 0{index + 1}</span><span className="time-pill">Exemple : reste {encounter.remaining}</span></div>
-      {revealed.includes(encounter.id) ? <><PersonPreview person={encounter.person} /><UnavailableButton>Envoyer un cœur</UnavailableButton></> : <>
-        <Avatar /><h2>Tu pourrais plaire à quelqu’un à proximité.</h2>
-        <p>Un profil à découvrir, selon ses choix de visibilité.</p>
-        <button className="outline-button" onClick={() => setRevealed(current => [...current, encounter.id])}>Découvrir le profil fictif <span className="sr-only">{index + 1}</span></button>
-      </>}
-    </article>)}</div>}
-    <SignalDivider />
-    <p className="screen-note">Aucun lieu ni trajet affiché. Consulter un profil ne lui envoie aucune notification.</p>
-  </section>;
+  const { state, update } = useStore(); const [revealed, setRevealed] = useState<string[]>([]); const [empty, setEmpty] = useState(false);
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => { const timer = window.setInterval(() => setNow(Date.now()), 1000); return () => window.clearInterval(timer); }, []);
+  const suggestions = state.suggestions.filter(x => x.to === state.active && accessible(state, x.from, x.to) && !x.revoked && x.expires > now);
+  return <section className="mobile-screen"><ScreenHeading eyebrow="LES POSSIBLES AUTOUR DE VOUS" title="Rencontres">Une suggestion, une possibilité. À vous de choisir.</ScreenHeading><p className="info-strip">Une rencontre potentielle est disponible 24 heures.</p><p className="screen-note">Croisements simulés, aucune localisation. Une suggestion n’est pas un cœur.</p><button className="preview-switch" onClick={() => setEmpty(!empty)}>{empty ? 'Revoir les suggestions fictives' : 'Voir l’état vide (démo)'}</button><div className="mobile-list">{empty || !suggestions.length ? <EmptyState title="Le prochain croisement reste à écrire.">Vos rencontres potentielles apparaîtront ici.</EmptyState> : suggestions.map((x, i) => { const p = state.profiles.find(p => p.id === x.from)!; const sent = state.hearts.some(h => h.from === state.active && h.to === p.id); return <article className="encounter-card" key={x.id}><span className="time-pill">Disponible jusqu’au {new Date(x.expires).toLocaleString('fr-FR')}</span>{revealed.includes(x.id) ? <><PersonPreview person={{ ...p, age: ageAt(p.birthDate) }} /><button className="outline-button" disabled={sent} onClick={() => update(s => sendHeart(s, s.active, p.id))}>{sent ? 'Cœur envoyé' : 'Envoyer un cœur'}</button></> : <><Avatar /><h2>Tu pourrais plaire à quelqu’un à proximité.</h2><p>Un profil à découvrir, selon ses choix de visibilité.</p><button className="outline-button" onClick={() => setRevealed([...revealed, x.id])}>Découvrir le profil fictif <span className="sr-only">{i + 1}</span></button></>}</article>; })}</div><p className="screen-note">Consulter un profil ne lui envoie aucune notification.</p></section>;
 }

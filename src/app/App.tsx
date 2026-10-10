@@ -14,6 +14,8 @@ import { MessagesPage, ConversationPage } from '../features/messaging/MessagesPa
 import { TrustPage, VerificationPage } from '../features/trust/TrustPages';
 import { AuthPage } from '../features/account/AuthPage';
 import { QuestionnairePage } from '../features/account/QuestionnairePage';
+import { lazy, Suspense } from 'react';
+const LabPage = import.meta.env.DEV ? lazy(() => import('../features/demo/LabPage').then(m => ({ default: m.LabPage }))) : null;
 import './sprint.css';
 import './phone.css';
 import './romantic-future.css';
@@ -41,6 +43,7 @@ export function App() {
       <Route path={routes.home} element={<DashboardPage />} />
       <Route path={routes.encounters} element={<EncountersPage />} />
       <Route path={routes.hearts} element={<HeartsPage />} />
+      {LabPage && <Route path="/laboratoire" element={<Suspense fallback={<p>Chargement…</p>}><LabPage /></Suspense>} />}
       <Route path="/connexion" element={<AuthPage />} /><Route path="/questionnaire" element={<QuestionnairePage />} />
       <Route path="/messages" element={<MessagesPage />} /><Route path="/messages/:id" element={<ConversationPage />} /><Route path="/confiance/:slug" element={<TrustPage />} /><Route path="/verification" element={<VerificationPage />} />
       <Route path={routes.profile} element={<ProfilePage />} />
