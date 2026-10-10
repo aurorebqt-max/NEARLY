@@ -1,6 +1,6 @@
 # NEARLY ♡
 
-**Statut : mission 4 — direction artistique romantic tech premium (affinages visuels).** Nearly cible exclusivement les smartphones iPhone et Android. React/Vite sert à tester le design dans Codespaces, avec un cadre smartphone centré sur iPad et ordinateur. Les quatre rubriques utilisent des données fictives. Aucune fonctionnalité de rencontre réelle ni migration React Native n’est implémentée. Voir [PROGRESS.md](PROGRESS.md) pour reprendre le travail.
+**Statut : prototype interactif local — sprint du 10 octobre 2026.** Nearly reste exclusivement pensée pour smartphone, avec un cadre vertical sur ordinateur. Cinq onglets, onboarding local, profil éditable, questionnaire, compatibilité directionnelle, cœurs/matchs et messagerie fonctionnent avec des données de démonstration persistantes. Aucun backend ni détection réelle. Voir [PROGRESS.md](PROGRESS.md) et [le bilan fonctionnel du sprint](Docs/07-sprint-prototype-local.md).
 
 > Nom provisoire : **Nearly** — « Closer than you think. » Disponibilité du nom/de la marque/du domaine non vérifiée. Ne pas copier les visuels, sons ou interface de *Love Alarm*.
 
@@ -31,7 +31,11 @@ npm run dev
 
 Ouvrir http://localhost:5173. Dans Codespaces, ouvrir le port **5173** depuis l'onglet Ports ; sur téléphone, ouvrir son URL HTTPS transférée, avec le compte GitHub autorisé si le port est privé. Depuis une machine locale, sur le même réseau Wi-Fi, utiliser `http://ADRESSE_IP_DE_LA_MACHINE:5173` (pare-feu autorisant le port). Le serveur écoute sur `0.0.0.0`.
 
-Le bouton « Découvrir Nearly » ouvre l’interface smartphone. Les quatre rubriques sont navigables : Accueil, Rencontres, Cœurs et Profil. La présentation d’origine reste à `/#/` et `/#/presentation`. Sur Accueil, « Simuler un cœur reçu » ajoute un exemple fictif et anime le compteur. Les exemples se réinitialisent au rechargement ou à la sortie de l’interface smartphone. Le routage par fragment (`/#/accueil`) permet de recharger et de partager les pages sans réécriture côté hébergeur.
+Le bouton « Découvrir Nearly » ouvre l’espace fictif Aurore. Les cinq onglets sont navigables : Accueil, Rencontres, Cœurs, Messages et Profil. La présentation d’origine reste à `/#/` et `/#/presentation`.
+
+Pour votre parcours local : `/#/connexion` → Créer un compte → compléter le profil avec 1–6 illustrations fictives → questionnaire. L’e-mail est seulement un identifiant local sans mot de passe ni envoi d’e-mail ; utilisez des données fictives. Le profil, les préférences et les interactions persistent dans ce navigateur. Profil permet l’édition, les paramètres, la vérification simulée et l’accès aux six pages de confiance provisoires.
+
+Pour tester le flux complet : `npm run dev`, puis `/#/laboratoire`. Choisir A/B, autoriser les radars, simuler, changer de point de vue, découvrir la suggestion et envoyer deux cœurs volontaires pour ouvrir une conversation. Le laboratoire est absent du build de production. Aucun score de beauté, Bluetooth, santé ou géolocalisation.
 
 ## Vérifications
 ```sh
@@ -40,21 +44,22 @@ npm run typecheck
 npm run build
 npx playwright install chromium webkit
 npm test
+npm run test:lab
 ```
 
 Playwright peut demander des bibliothèques système supplémentaires sur une nouvelle machine (`npx playwright install-deps chromium webkit`). Les tests lancent le serveur de prévisualisation sur le port 4173 et nécessitent un build préalable. `npm run preview` permet aussi d'inspecter le build manuellement.
 
 ## Structure
-- `src/app/` : navigation, cadre de l'application web et raffinement visuel `romantic-future.css`.
-- `src/features/mobile/` : les quatre écrans smartphone et leurs composants communs.
-- `src/features/demo/` : données fictives TypeScript et contexte de démonstration en mémoire.
-- `src/features/welcome/`, `src/features/home/` : présentation existante conservée.
-- `src/design-system/` : tokens TypeScript, styles et composants visuels.
-- `src/domain/` : emplacement documenté pour le futur métier indépendant de l'interface ; aucune règle implémentée à ce stade.
-- `tests/` : parcours navigateur et contrôles responsive.
-- `Docs/`, `Technical/` : décisions produit et conception technique.
+- `src/app/` : routes, cadre smartphone et couches visuelles Nearly.
+- `src/domain/` : modèles et moteur de compatibilité testable.
+- `src/data/` : fixtures uniques et paramètres de démonstration.
+- `src/services/` : auth, profils, préférences, cœurs/matchs/messages, visibilité et suppression.
+- `src/adapters/` : stockage remplaçable et adaptation du clavier navigateur.
+- `src/state/` : état partagé persistant.
+- `src/features/` : écrans mobile, compte, questionnaire, confiance, messagerie et laboratoire.
+- `tests/`, `tests-dev/` : métier, parcours navigateur et laboratoire.
 
-React Native pourra réutiliser les tokens et le futur métier TypeScript. Les composants HTML/CSS et la navigation web nécessiteront des équivalents natifs. Aucun backend, Bluetooth, push ou accès santé n'est connecté.
+Le détail des choix encore ouverts et des limites est dans [Docs/07-sprint-prototype-local.md](Docs/07-sprint-prototype-local.md). Supabase et les autorisations serveur restent à implémenter ; le compte local n’est pas une authentification sécurisée. Les textes de confiance sont provisoires, aucun signalement n’est transmis ni traité par une équipe.
 
 ## Sauvegarde et reprise
 Consulter `PROGRESS.md`, puis les décisions validées avant toute nouvelle mission. À chaque jalon cohérent : vérifier, mettre à jour la progression, committer et pousser sur GitHub. Un fichier non committé/poussé n'est pas sauvegardé sur GitHub. Ne commencer la mission suivante qu'après accord explicite.

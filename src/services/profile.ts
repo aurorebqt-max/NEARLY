@@ -9,5 +9,5 @@ export function validateProfile(p: UserProfile) {
 }
 export function saveProfile(s: LocalState, p: UserProfile) {
   const error = validateProfile(p); if (error) throw new Error(error);
-  s.profiles = s.profiles.map(old => old.id === p.id ? { ...p, name: p.name.trim(), onboarded: true } : old);
+  s.profiles = s.profiles.map(old => old.id === p.id ? { ...p, name: p.name.trim(), radar: old.radar, invisible: old.invisible, verified: old.verified, onboarded: true } : old);
 }

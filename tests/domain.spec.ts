@@ -4,7 +4,7 @@ import { defaultPreferences } from '../src/data/config';
 import { evaluateCompatibility, ageAt } from '../src/domain/compatibility';
 import { accessible, block, cross, sendHeart, sendMessage, setVisibility } from '../src/services/social';
 import { login, register } from '../src/services/auth';
-import { validateProfile } from '../src/services/profile';
+import { saveProfile, validateProfile } from '../src/services/profile';
 import { validatePreferences } from '../src/services/preferences';
 
 test('directional compatibility respects essential criteria and weighted traits', () => {
@@ -57,4 +57,12 @@ test('profile deletion removes personal records and preserves only demo entry po
   expect(s.profiles.some(p => p.id === id)).toBe(false); expect(s.accounts['delete@example.test']).toBeUndefined(); expect(s.preferences[id]).toBeUndefined(); expect(s.reports).toHaveLength(0);
   s.profiles.find(p => p.id === 'aurore')!.name = 'Modified'; deleteActiveProfile(s);
   expect(s.profiles.find(p => p.id === 'aurore')!.name).toBe('Aurore'); expect(s.hearts).toHaveLength(0); expect(s.conversations).toHaveLength(0);
+});
+
+test('profile edits preserve independently updated consent and verification', () => {
+  const s = initialState(); const draft = structuredClone(s.profiles[0]);
+  setVisibility(s, 'aurore', true, true); s.profiles[0].verified = false;
+  draft.name = 'Edited'; saveProfile(s, draft);
+  expect(s.profiles[0]).toMatchObject({ name: 'Edited', radar: true, invisible: true, verified: false });
+  expect(accessible(s, 'noah', 'aurore')).toBe(true);
 });

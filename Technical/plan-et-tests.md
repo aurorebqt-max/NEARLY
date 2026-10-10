@@ -1,5 +1,8 @@
 # Plan de développement et validation
 
+> État actuel du prototype local : voir [le sprint du 10 octobre 2026](../Docs/07-sprint-prototype-local.md) et [PROGRESS.md](../PROGRESS.md). Les sections de missions ci-dessous sont historiques ; les intégrations réelles restent proposées.
+
+
 ## Phase 0 — conception (continue)
 Terminer le registre des décisions ; écrire machines à états, critères d'acceptation, politique de confidentialité et schémas de données. Préciser ce qui est non réalisable ou non validé sur iOS/Android.
 

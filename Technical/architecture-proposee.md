@@ -1,5 +1,8 @@
 # Architecture proposée (à valider après les décisions métier)
 
+> État actuel du prototype local : voir [le sprint du 10 octobre 2026](../Docs/07-sprint-prototype-local.md) et [PROGRESS.md](../PROGRESS.md). Les sections de missions ci-dessous sont historiques ; les intégrations réelles restent proposées.
+
+
 ## Deux couches séparées
 1. **Prototype fonctionnel web**, possible depuis Codespaces/iPad : React, TypeScript, Vite, Supabase et Vercel, avec simulation explicite de rencontre et de notification ; permet de valider UX, direction des alertes, cœurs, compteur et tests.
 2. **Prototype natif de proximité sur deux vrais téléphones** : vérifier tôt Bluetooth, fonctionnement en arrière-plan, téléphone verrouillé, autorisations, batteries et limites de publication. Ne pas vendre la fonctionnalité comme acquise.

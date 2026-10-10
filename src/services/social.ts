@@ -22,7 +22,7 @@ export function sendHeart(s: LocalState, from: string, to: string) {
 export function setVisibility(s: LocalState, id: string, radar: boolean, invisible: boolean) {
   const p = s.profiles.find(p => p.id === id)!;
   p.radar = radar; p.invisible = invisible;
-  if (invisible) s.suggestions.filter(x => x.from === id || x.to === id).forEach(x => { x.revoked = true; });
+  if (invisible) s.suggestions.filter(x => x.from === id).forEach(x => { x.revoked = true; });
 }
 export function block(s: LocalState, a: string, b: string) {
   if (!blocked(s, a, b)) s.blocks.push(pairKey(a, b));
