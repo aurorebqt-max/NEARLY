@@ -2,6 +2,20 @@
 
 Mise à jour : **10 octobre 2026**. Sprint fonctionnel autorisé sur les dix blocs ; mission 4 terminée pour le périmètre local/mock demandé. Design Romantic Future / Romantic Tech Premium conservé.
 
+## Sprint 2 — reprise Supabase du 10 octobre 2026
+
+État retrouvé : `main` à `d43809a`, synchronisé avec la référence locale `origin/main`. Les commits `ebd8a0d` (schéma/RPC/contrats) et `d43809a` (adaptateur et écrans) préexistaient. Seuls `scripts/test-supabase.mjs` et `supabase/.gitignore` étaient non suivis ; aucun diff sur les fichiers suivis.
+
+Déjà implémenté : client Supabase, variables publiques dans `.env.example`, choix local/Supabase, session e-mail/mot de passe, profils et préférences persistants, Storage privé, commandes cœurs/matchs/conversations/messages/blocage/signalement et polling de 10 secondes. Laboratoire et services locaux conservés.
+
+Migrations conservées : `202610100001_nearly.sql` et `202610100002_photos.sql`. Tables : profiles, profile_photos, preferences, physical_traits, interests, personality_preferences, encounters, hearts, matches, conversations, messages, blocks, reports, verification_requests. RLS et RPC définies ; bucket privé `profile-photos` (JPEG/PNG/WebP, 5 Mo).
+
+À la reprise, aucun conteneur, volume ou image Docker ; ancien journal `/tmp/nearly-supabase-start.log` absent. Le téléchargement a saturé le disque et empêché PostgreSQL de démarrer (ENOSPC). Stockage Docker déplacé intégralement vers `/tmp/nearly-docker-data`, montage conservé à `/var/lib/docker`, sans purge de fichiers ou volumes. Attention : `/tmp` est éphémère dans cet environnement. Journaux : `/tmp/nearly-supabase-resume.log` et `/tmp/nearly-supabase-resume-2.log`.
+
+Validation en cours : test existant raccordé à `npm run test:supabase`, imports Node explicites pour ESLint, assertions sur migrations/RLS/persistance et données invalides. Lint et typecheck passés ; tests d'intégration en cours. Premier build bloqué par le disque plein, à relancer.
+
+Limites : aucun projet hébergé connecté ; croisements par fixture administrative de test uniquement ; Apple/Google, notifications, modération humaine et suppression autonome du compte distant non implémentés. Vérification d'identité simulée sans badge fiable. Les sections suivantes conservent le bilan historique du mode local.
+
 ## Réellement fonctionnel en local
 - Navigation smartphone à cinq onglets : Accueil, Rencontres, Cœurs, Messages, Profil. Cadre vertical, safe areas, scroll indépendant, adaptation du viewport au clavier.
 - Connexion/inscription **de démonstration**, identifiant e-mail local sans authentification sécurisée. Onboarding avec prénom, naissance déclarée adulte, 1–6 illustrations, bio, intention, préférences de base. Session restaurée au rechargement.
@@ -16,7 +30,7 @@ Mise à jour : **10 octobre 2026**. Sprint fonctionnel autorisé sur les dix blo
 - Laboratoire réservé au développement : sélectionner A/B, consentement radar, croisement, changement de point de vue, suggestions, cœurs, match et conversation via les mêmes services. Route/import absents du build de production.
 - Architecture séparée : domain, services, state, features, data, adapters ; fixtures uniques. Stockage versionné, rejet des snapshots incomplets, erreur visible si sauvegarde impossible.
 
-## Toujours mocké / non implémenté
+## Bilan historique du sprint local — avant Supabase
 Aucun Supabase, backend, authentification sécurisée, Apple/Google, transmission de messages, push/alarme sonore, Bluetooth, géolocalisation, santé, reconnaissance faciale, caméra réelle, vérification d’identité/majorité, photo réelle téléversée, support ou modération distante. Les illustrations sont originales et fictives. Textes légaux non définitifs.
 
 Le prototype vise un navigateur et un onglet actif. Aucun chiffrement ni contrôle d’accès serveur : utiliser exclusivement des données de démonstration. Les comptes locaux sont des personnages de simulation. Les essais navigateur ne remplacent pas une validation physique iPhone/Android du clavier et des safe areas.

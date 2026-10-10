@@ -1,6 +1,6 @@
 # NEARLY ♡
 
-**Statut : prototype interactif local — sprint du 10 octobre 2026.** Nearly reste exclusivement pensée pour smartphone, avec un cadre vertical sur ordinateur. Cinq onglets, onboarding local, profil éditable, questionnaire, compatibilité directionnelle, cœurs/matchs et messagerie fonctionnent avec des données de démonstration persistantes. Aucun backend ni détection réelle. Voir [PROGRESS.md](PROGRESS.md) et [le bilan fonctionnel du sprint](Docs/07-sprint-prototype-local.md).
+**Statut : Sprint 2 Supabase en validation — mode local conservé.** Nearly reste exclusivement pensée pour smartphone, avec un cadre vertical sur ordinateur. Cinq onglets, onboarding local, profil éditable, questionnaire, compatibilité directionnelle, cœurs/matchs et messagerie fonctionnent avec des données de démonstration persistantes. Adaptateur Supabase implémenté pour les comptes et interactions ; aucune détection réelle. Voir [PROGRESS.md](PROGRESS.md) et [le bilan fonctionnel du sprint](Docs/07-sprint-prototype-local.md).
 
 > Nom provisoire : **Nearly** — « Closer than you think. » Disponibilité du nom/de la marque/du domaine non vérifiée. Ne pas copier les visuels, sons ou interface de *Love Alarm*.
 
@@ -59,7 +59,20 @@ Playwright peut demander des bibliothèques système supplémentaires sur une no
 - `src/features/` : écrans mobile, compte, questionnaire, confiance, messagerie et laboratoire.
 - `tests/`, `tests-dev/` : métier, parcours navigateur et laboratoire.
 
-Le détail des choix encore ouverts et des limites est dans [Docs/07-sprint-prototype-local.md](Docs/07-sprint-prototype-local.md). Supabase et les autorisations serveur restent à implémenter ; le compte local n’est pas une authentification sécurisée. Les textes de confiance sont provisoires, aucun signalement n’est transmis ni traité par une équipe.
+Le détail des choix encore ouverts et des limites est dans [Docs/07-sprint-prototype-local.md](Docs/07-sprint-prototype-local.md). Supabase dispose de migrations, RLS et RPC ; le compte du mode local reste sans authentification sécurisée. Les textes de confiance sont provisoires, les signalements Supabase sont enregistrés en base, sans équipe de traitement connectée.
 
 ## Sauvegarde et reprise
 Consulter `PROGRESS.md`, puis les décisions validées avant toute nouvelle mission. À chaque jalon cohérent : vérifier, mettre à jour la progression, committer et pousser sur GitHub. Un fichier non committé/poussé n'est pas sauvegardé sur GitHub. Ne commencer la mission suivante qu'après accord explicite.
+
+## Backend Supabase (Sprint 2)
+
+Voir [la configuration et les tests](Docs/09-supabase.md). Le mode local reste le défaut ; aucune fixture n'est importée automatiquement.
+
+```sh
+npx supabase status
+# Seulement si les services sont arrêtés :
+npx supabase start
+npm run test:supabase
+```
+
+Configurer `.env.local` à partir de `.env.example` avec l'URL et la clé publique, puis redémarrer Vite. Jamais de clé secrète/service_role dans une variable `VITE_`. Ne pas réinitialiser la base pour reprendre une session.
