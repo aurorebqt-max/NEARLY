@@ -1,6 +1,8 @@
 # NEARLY ♡
 
-**Statut : Sprint 2 Supabase validé en local — mode local conservé.** Nearly reste exclusivement pensée pour smartphone, avec un cadre vertical sur ordinateur. Cinq onglets, onboarding local, profil éditable, questionnaire, compatibilité directionnelle, cœurs/matchs et messagerie fonctionnent avec des données de démonstration persistantes. Adaptateur Supabase implémenté pour les comptes et interactions ; aucune détection réelle. Voir [PROGRESS.md](PROGRESS.md) et [le bilan fonctionnel du sprint](Docs/07-sprint-prototype-local.md).
+**Statut : Sprint 2 Supabase validé en local ; Sprint 4 mobile natif en cours.** Nearly reste exclusivement pensée pour smartphone, avec un cadre vertical sur ordinateur. Cinq onglets, onboarding local, profil éditable, questionnaire, compatibilité directionnelle, cœurs/matchs et messagerie fonctionnent avec des données de démonstration persistantes. Adaptateur Supabase implémenté pour les comptes et interactions ; aucune détection réelle. Voir [PROGRESS.md](PROGRESS.md) et [le bilan fonctionnel du sprint](Docs/07-sprint-prototype-local.md).
+
+Une application native **Expo / React Native** est en cours dans [`mobile/`](mobile/) sans remplacer le prototype Vite. Voir [la documentation mobile](Docs/10-mobile.md).
 
 > Nom provisoire : **Nearly** — « Closer than you think. » Disponibilité du nom/de la marque/du domaine non vérifiée. Ne pas copier les visuels, sons ou interface de *Love Alarm*.
 

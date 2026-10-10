@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Nearly",
+    "slug": "nearly",
+    "scheme": "nearly",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.nearly.app"
+    },
+    "android": {
+      "package": "com.nearly.app",
+      "edgeToEdgeEnabled": true
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Nearly utilise vos photos pour illustrer votre profil.",
+          "cameraPermission": false,
+          "microphonePermission": false
+        }
+      ]
+    ]
+  }
+}

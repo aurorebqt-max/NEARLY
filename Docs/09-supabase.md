@@ -10,7 +10,7 @@ Créer `.env.local` (ignoré par Git) depuis `.env.example` avec `VITE_SUPABASE_
 
 Exécuter `npx supabase status`, `docker ps -a` et `docker volume ls`. Si arrêté, `npx supabase start` réutilise les données disponibles. Pour des migrations nouvelles sur une instance active : `npx supabase migration up --local`. Aucun reset ou effacement de volume nécessaire.
 
-Migrations : `202610100001_nearly.sql` (14 tables, trigger Auth, RLS et RPC) et `202610100002_photos.sql` (bucket privé et photos). Vérifier avec `npx supabase migration list --local`.
+Migrations : `202610100001_nearly.sql` (14 tables, trigger Auth, RLS et RPC), `202610100002_photos.sql` (bucket privé et photos), `202610100003_realtime.sql` (publication des cœurs, matchs, conversations et messages pour Realtime, sans exposer les rencontres anonymes). Vérifier avec `npx supabase migration list --local`.
 
 ## Contrats et droits
 
@@ -28,11 +28,11 @@ Couverture : migrations et 14 tables/RLS, authentification/reconnexion, profils/
 
 `npm run test:supabase:ui` démarre Vite sur 5175 avec les variables publiques locales en mémoire et vérifie le parcours mobile complet (connexion, profil, vraie photo, préférences, session et retour démo). Son compte est créé et nettoyé séparément ; aucun fichier de trace contenant une session n'est enregistré.
 
-Validation de bloc : lint, typecheck, build, `npm test`, `npm run test:lab`, `npm run test:supabase`, `npm run test:supabase:ui`. Les deux migrations sont appliquées et `npx supabase db lint --local` ne signale aucune erreur.
+Validation du Sprint 2 : lint, typecheck, build, `npm test`, `npm run test:lab`, `npm run test:supabase`, `npm run test:supabase:ui`. Au Sprint 4, la migration Realtime 003 a été appliquée sans reset sur Supabase local et `npm run test:supabase` a passé ses tests d'intégration. Ces validations locales ne modifient aucun projet Supabase distant.
 
 ## Limites
 
-Aucun déploiement distant. Messages par polling toutes les 10 secondes et au retour au premier plan, sans push. Pas de génération automatique de croisements serveur, Bluetooth, géolocalisation, santé ou reconnaissance faciale. Apple/Google non raccordés. Vérification simulée. Signalements persistants, traitement humain à organiser. Suppression autonome du compte distant non implémentée et annoncée comme telle dans l'interface. Questions produit inchangées, aucune politique définitive de conservation/anti-abus ajoutée.
+Aucun déploiement distant. Le prototype web recharge les messages par polling toutes les 10 secondes et au retour au premier plan ; l'application native du Sprint 4 s'abonne aux changements cœurs/matchs/conversations/messages via Realtime. Pas de push, de génération automatique de croisements serveur, Bluetooth, géolocalisation, santé ou reconnaissance faciale. Apple/Google non raccordés. Vérification simulée. Signalements persistants, traitement humain à organiser. Suppression autonome du compte distant non implémentée et annoncée comme telle dans l'interface. Questions produit inchangées, aucune politique définitive de conservation/anti-abus ajoutée.
 
 ## Environnement de reprise
 

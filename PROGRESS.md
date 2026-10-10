@@ -1,6 +1,29 @@
 # Nearly — progression et reprise
 
-Mise à jour : **10 octobre 2026**. Sprint 2 Supabase repris et validé en local ; mode local/mock, laboratoire et design conservés. Aucun nouveau sprint engagé.
+Mise à jour : **10 octobre 2026**. Sprint 4 engagé : première application Expo/React Native en place dans `mobile/`, le web et le mode local/mock sont conservés.
+
+## Sprint 4 — application native, premier bloc
+
+État initial repris : `main`/`origin/main` à `e5cdf45` (`fix: stabilize Supabase auth and validate real account photo flows`), arbre propre. Aucun projet natif, manifeste Expo ou dépendance React Native préexistants ; `src/features/mobile` contient les vues web à ne pas porter telles quelles.
+
+Livré dans le premier bloc :
+- Application Expo SDK 54 / React Native / TypeScript autonome dans `mobile/`, avec ses dépendances et lockfile distincts ; Vite, le package racine et les routes web restent en place.
+- Navigation native à cinq onglets : Accueil, Rencontres, Cœurs, Messages et Profil ; surfaces adaptées au thème Nearly, safe areas, clavier natif et retour haptique discret.
+- Auth Supabase e-mail/mot de passe avec session persistée sur AsyncStorage, callbacks de confirmation par lien et messages d’erreur explicites.
+- Chargement du snapshot `nearly_snapshot` et appels aux RPC existantes pour rencontres, cœurs, conversations/messages, visibilité, profil et préférences ; aucun code métier Supabase copié dans une API parallèle.
+- Édition native du profil, ajout/retrait de portraits privés via le bucket existant (redimensionnement/réencodage JPEG, limite 5 Mo), tranche d’âge, radar/invisibilité.
+- Migration `202610100003_realtime.sql` pour publier cœurs, matchs, conversations et messages ; abonné mobile protégé par RLS, avec rechargement manuel si Realtime est indisponible.
+- Aucune proximité, BLE, géolocalisation, notifications push ou accès caméra/microphone ajouté.
+
+Validation locale : `npm --prefix mobile run typecheck`, exports Metro Android et iOS, `npm run lint`, `npm run build` et `npm run test:supabase` passés. Les deux bundles natifs sont produits. Migration 003 appliquée au Supabase local sans reset ; Realtime contient les quatre tables attendues. Aucune modification appliquée à un projet Supabase distant. Pas encore de validation sur appareils iOS/Android physiques. Variables de lancement et limites : `Docs/10-mobile.md`.
+
+À poursuivre dans le Sprint 4 : essais d’authentification/confirmation sur appareil, parcours natifs et composants de présentation profil approfondis, puis tests sur appareils réels. Permissions/notifications ne sont pas encore validées ; BLE reste optionnel, isolé et non commencé.
+
+Branche : `main` ; `origin/main` était synchronisé à `e5cdf45` lors de la reprise.
+
+---
+
+## Historique — Sprint 2 Supabase repris et validé en local
 
 ## Sprint 2 — reprise Supabase du 10 octobre 2026
 
