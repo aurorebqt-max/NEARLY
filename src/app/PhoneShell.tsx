@@ -1,3 +1,4 @@
+import { useKeyboardViewport } from '../adapters/useKeyboardViewport';
 import { useEffect, useRef } from 'react';
 import { Link, NavLink, Navigate, Outlet, useLocation } from 'react-router-dom';
 import { Icon, type IconName } from '../design-system/components/Icon';
@@ -15,6 +16,7 @@ const navigation: { to: string; label: string; icon: IconName }[] = [
   { to: routes.profile, label: 'Profil', icon: 'person' },
 ];
 export function PhoneShell() {
+  useKeyboardViewport();
   const { pathname } = useLocation();
   const main = useRef<HTMLElement>(null);
   const { state, update, error } = useStore();

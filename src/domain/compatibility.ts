@@ -2,7 +2,7 @@ import type { AttractionPreferences, UserProfile } from './models';
 import { demoConfig } from '../data/config';
 export function ageAt(birthDate: string, now = new Date()) {
   const birth = new Date(birthDate + 'T00:00:00Z');
-  if (!Number.isFinite(birth.getTime())) return NaN;
+  if (!Number.isFinite(birth.getTime()) || birth.toISOString().slice(0, 10) !== birthDate) return NaN;
   return now.getUTCFullYear() - birth.getUTCFullYear() - Number(now.getUTCMonth() < birth.getUTCMonth() || (now.getUTCMonth() === birth.getUTCMonth() && now.getUTCDate() < birth.getUTCDate()));
 }
 export function evaluateCompatibility(preferences: AttractionPreferences, candidate: UserProfile, now = new Date()) {

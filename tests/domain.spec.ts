@@ -48,3 +48,13 @@ test('local account validation and default consent', () => {
   expect(() => register(s, 'test@example.test')).toThrow(); s.active = 'aurore'; login(s, 'TEST@example.test'); expect(s.active).toBe(id);
   expect(validatePreferences({ ...defaultPreferences(), ageRange: [40, 18] })).not.toBe('');
 });
+
+test('profile deletion removes personal records and preserves only demo entry point', async () => {
+  const { deleteActiveProfile } = await import('../src/services/dataManagement');
+  const s = initialState(); register(s, 'delete@example.test'); const id = s.active;
+  s.reports.push({ from: id, to: 'lucas', reason: 'test' });
+  deleteActiveProfile(s);
+  expect(s.profiles.some(p => p.id === id)).toBe(false); expect(s.accounts['delete@example.test']).toBeUndefined(); expect(s.preferences[id]).toBeUndefined(); expect(s.reports).toHaveLength(0);
+  s.profiles.find(p => p.id === 'aurore')!.name = 'Modified'; deleteActiveProfile(s);
+  expect(s.profiles.find(p => p.id === 'aurore')!.name).toBe('Aurore'); expect(s.hearts).toHaveLength(0); expect(s.conversations).toHaveLength(0);
+});

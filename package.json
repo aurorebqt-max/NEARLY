@@ -1,14 +1,15 @@
 {
   "name": "nearly",
   "version": "0.1.0",
-  "description": "Nearly \u2014 premier aper\u00e7u web mobile",
+  "description": "Nearly — premier aperçu web mobile",
   "scripts": {
     "dev": "vite",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "build": "npm run typecheck && vite build",
     "preview": "vite preview",
-    "test": "playwright test"
+    "test": "playwright test",
+    "test:lab": "playwright test --config playwright.lab.config.ts"
   },
   "repository": {
     "type": "git",

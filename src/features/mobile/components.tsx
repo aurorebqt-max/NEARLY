@@ -16,8 +16,8 @@ export function UnavailableButton({ children }: { children: ReactNode }) {
 }
 
 /** Decorative, original vector portrait for fictional preview cards. */
-export function Portrait({ name }: { name: string }) {
-  const variant = [...name].reduce((n, c) => n + c.charCodeAt(0), 0) % 3;
+export function Portrait({ name, seed = name }: { name: string; seed?: string }) {
+  const variant = [...seed].reduce((n, c) => n + c.charCodeAt(0), 0) % 3;
   return <svg className="portrait-art" viewBox="0 0 320 360" role="img" aria-label={`Illustration fictive de ${name}`}>
     <rect width="320" height="360" fill="#3b2540" />
     <circle cx="252" cy="100" r="115" fill="#A65AB8" opacity=".22" />

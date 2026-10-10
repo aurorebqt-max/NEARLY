@@ -3,7 +3,7 @@ test('onboarding saves profile, preferences and session across reload', async ({
   await page.goto('/#/connexion'); await page.getByRole('button', { name: 'Créer un compte', exact: true }).click();
   await page.getByLabel('E-mail de démonstration').fill('alice@example.test'); await page.getByRole('button', { name: 'Créer mon compte local' }).click();
   await page.getByLabel('Prénom', { exact: true }).fill('Alice'); await page.getByLabel('Date de naissance privée').fill('1998-05-12');
-  await page.getByLabel('Présentation', { exact: true }).fill('Un profil de test.'); await page.getByLabel('Intention', { exact: true }).selectOption('Faire connaissance');
+  await page.getByLabel('Présentation', { exact: true }).fill('Un profil de test.'); await page.getByRole('combobox', { name: 'Intention', exact: true }).selectOption('Faire connaissance');
   await page.getByRole('button', { name: 'Ajouter une photo fictive' }).click(); await page.getByRole('button', { name: 'Valider mon onboarding' }).click();
   await expect(page.getByRole('heading', { name: 'Alice', exact: true })).toBeVisible();
   await page.getByRole('link', { name: 'Questionnaire d’attirance et préférences' }).click(); await page.getByRole('button', { name: 'Homme', exact: true }).click();
