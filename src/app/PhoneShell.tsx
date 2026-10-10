@@ -9,6 +9,7 @@ const navigation: { to: string; label: string; icon: IconName }[] = [
   { to: routes.home, label: 'Accueil', icon: 'home' },
   { to: routes.encounters, label: 'Rencontres', icon: 'spark' },
   { to: routes.hearts, label: 'Cœurs', icon: 'heart' },
+  { to: '/messages', label: 'Messages', icon: 'message' },
   { to: routes.profile, label: 'Profil', icon: 'person' },
 ];
 export function PhoneShell() {

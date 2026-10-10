@@ -1,5 +1,6 @@
-export type IconName = 'heart' | 'home' | 'spark' | 'person' | 'arrow' | 'shield';
+export type IconName = 'heart' | 'home' | 'spark' | 'person' | 'arrow' | 'shield' | 'message';
 const paths: Record<IconName, string> = {
+  message: 'M4 4H20V17H10L4 21V4Z',
   heart: 'M12 20S3 14.5 3 8.5C3 3 10 2 12 7C14 2 21 3 21 8.5C21 14.5 12 20 12 20Z',
   home: 'M3 10 12 3 21 10M5 9V21H10V15H14V21H19V9',
   spark: 'M12 3 14.5 9.5 21 12 14.5 14.5 12 21 9.5 14.5 3 12 9.5 9.5 12 3Z',

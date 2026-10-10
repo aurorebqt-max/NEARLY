@@ -9,6 +9,10 @@ import { EncountersPage } from '../features/mobile/EncountersPage';
 import { HeartsPage } from '../features/mobile/HeartsPage';
 import { ProfilePage } from '../features/mobile/ProfilePage';
 import { routes } from './routes';
+import { StoreProvider } from '../state/store';
+import { MessagesPage, ConversationPage } from '../features/messaging/MessagesPage';
+import { TrustPage, VerificationPage } from '../features/trust/TrustPages';
+import './sprint.css';
 import './phone.css';
 import './romantic-future.css';
 
@@ -25,7 +29,7 @@ function PresentationShell() {
 }
 
 export function App() {
-  return <HashRouter><Routes>
+  return <StoreProvider><HashRouter><Routes>
     <Route element={<PresentationShell />}>
       <Route path={routes.welcome} element={<WelcomePage />} />
       <Route path={routes.presentation} element={<HomePage />} />
@@ -35,7 +39,8 @@ export function App() {
       <Route path={routes.home} element={<DashboardPage />} />
       <Route path={routes.encounters} element={<EncountersPage />} />
       <Route path={routes.hearts} element={<HeartsPage />} />
+      <Route path="/messages" element={<MessagesPage />} /><Route path="/messages/:id" element={<ConversationPage />} /><Route path="/confiance/:slug" element={<TrustPage />} /><Route path="/verification" element={<VerificationPage />} />
       <Route path={routes.profile} element={<ProfilePage />} />
     </Route>
-  </Routes></HashRouter>;
+  </Routes></HashRouter></StoreProvider>;
 }

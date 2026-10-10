@@ -1,0 +1,4 @@
+import type { AttractionPreferences } from '../domain/models';
+// All unresolved product choices below are demonstration parameters, not product decisions.
+export const demoConfig = { threshold: .5, suggestionHours: 24, readHearts: 'explicit-button', retainHeartsAfterExpiry: true, withdrawAfterMatch: false, missingGender: 'no-suggestion', portraitMode: 'gallery', genres: ['Femme', 'Homme', 'Non-binaire'], intentions: ['Relation durable', 'Faire connaissance', 'Découvrir'], interests: ['Musique', 'Nature', 'Lecture', 'Cuisine', 'Voyages'], personalities: ['Calme', 'Spontané', 'Curieux', 'Sociable'], hairs: ['Bruns', 'Blonds', 'Roux', 'Gris'], styles: ['Décontracté', 'Créatif', 'Classique'] } as const;
+export const defaultPreferences = (): AttractionPreferences => ({ ageRange: [18, 99], genders: null, intentions: [], physical: { traits: {}, weight: 1 }, interests: { values: [], weight: 1 }, personality: { values: [], weight: 1 }, portraits: [] });

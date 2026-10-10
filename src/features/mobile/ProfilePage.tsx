@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { trustPages } from '../trust/TrustPages';
 import { sampleProfile } from '../demo/fixtures';
 import { Portrait, ScreenHeading, UnavailableButton, SignalDivider } from './components';
 export function ProfilePage() {
@@ -9,5 +11,5 @@ export function ProfilePage() {
     <section className="profile-section"><h2>Ce qui vous ressemble</h2><p>Caractéristiques facultatives, choisies par vous. Les champs restent à définir.</p><UnavailableButton>Compléter mes caractéristiques</UnavailableButton></section>
     <section className="profile-section"><h2>Vos futurs paramètres</h2><p>Présentation uniquement. Aucun réglage actif.</p><div className="settings-preview"><h3>Votre profil d’attirance</h3><p>Vos préférences vous appartiennent.</p><UnavailableButton>Questionnaire d’attirance</UnavailableButton><h3>Visibilité</h3><p>Radar désactivé par défaut. La pause conserve les rencontres déjà proposées jusqu’à expiration ; le mode invisible en révoque l’accès à votre profil, sans restauration automatique.</p><UnavailableButton>Paramètres de confidentialité</UnavailableButton><h3>Confidentialité et sécurité</h3><p>Blocage, signalement et suppression du compte à venir.</p></div></section>
     <p className="screen-note">Les champs et réglages détaillés seront précisés avec le cahier des charges.</p>
-  </section>;
+  <Link className="outline-button" to="/verification">Vérifier mon profil</Link>{Object.entries(trustPages).map(([slug, [title]]) => <p key={slug}><Link className="presentation-link" to={"/confiance/" + slug}>{title}</Link></p>)}</section>;
 }
