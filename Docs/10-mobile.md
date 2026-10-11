@@ -10,11 +10,32 @@ Le projet Expo/React Native TypeScript est isolé dans `mobile/` ; il ne remplac
 
 Pour les inscriptions avec confirmation e-mail, autoriser le lien `nearly://auth/callback` dans les URL de redirection du projet Supabase. Le schéma `nearly` est déclaré dans `app.json` ; les callbacks PKCE et les liens `token_hash`/OTP sont pris en charge.
 
+## Installer sur un téléphone
+
+`app.json` déclare les identifiants `com.nearly.app` pour iOS et Android. `eas.json` contient les profils `development`, `preview` (APK Android distribuable) et `production`. Aucun `projectId` EAS n’est inventé ou commité : créez/associez le projet depuis votre compte Expo, puis fournissez `EXPO_PUBLIC_EAS_PROJECT_ID` dans l’environnement EAS et dans `mobile/.env`. Ajoutez également les deux variables publiques Supabase aux environnements de build EAS.
+
+Avec EAS CLI et un compte Expo configuré :
+
+```sh
+cd mobile
+npx eas-cli build --profile development --platform android
+npx eas-cli build --profile preview --platform android
+npx eas-cli build --profile development --platform ios
+```
+
+Le build iOS de distribution requiert un compte Apple et les certificats/profils de signature correspondants ; EAS peut les créer après authentification. Aucun build distant ni publication App Store/Play Store n’a été lancé. Un export Metro n’est pas un APK/IPA installable.
+
 ## État des écrans
 
-Navigation native à cinq onglets : Accueil, Rencontres, Cœurs, Messages et Profil. L’application gère la session Auth sur AsyncStorage, restaure les liens de confirmation, charge le snapshot `nearly_snapshot`, puis utilise les RPC existantes pour révéler une rencontre, envoyer/lire un cœur, envoyer/lire des messages, enregistrer profil/préférences et gérer la visibilité. Les images du profil sont redimensionnées et réencodées en JPEG, puis envoyées dans le bucket privé existant. Des mises à jour Supabase Realtime rafraîchissent cœurs, matchs et messages ; le rechargement manuel reste disponible.
+Après inscription/connexion réelle, la session Supabase est persistée dans AsyncStorage et les profils incomplets restent dans l’onboarding jusqu’à validation serveur. L’onboarding reprend ses champs depuis un brouillon local, vérifie l’âge déclaré, exige une intention et 1 à 6 photos, puis enregistre les critères et le profil. Le profil permet l’édition, l’ajout/retrait/réorganisation des photos privées, les préférences directionnelles, le radar, l’export JSON, la suppression de compte et la déconnexion. Le parcours natif expose les rencontres, les cœurs, les matchs, les messages, le blocage et le signalement ; les RPC/RLS restent l’autorité backend.
 
-Le radar demeure informatif et désactivé par défaut : cette version n’implémente ni BLE, ni géolocalisation, ni notifications push. Aucune promesse de détection en arrière-plan n’est faite. Le sélecteur de photos demande l’accès à la photothèque au moment de l’ajout ; aucun accès caméra n’est demandé.
+Les photos sont choisies depuis la photothèque, réencodées en JPEG et gardées dans le bucket privé. La vérification d’identité n’est pas implémentée : ne pas afficher de badge vérifié sur la base d’une simulation.
+
+Le radar serveur gère les consentements et croisements transmis, mais aucun scanner/advertiser BLE natif n’est inclus ; la détection de proximité réelle n’est donc pas encore disponible. Le sélecteur demande l’accès à la photothèque au moment de l’ajout ; aucun accès caméra n’est demandé.
+
+Les notifications push nécessitent un build EAS sur appareil physique. Déployez `send-push`, renseignez `PUSH_WEBHOOK_SECRET` dans les secrets de la fonction et ajoutez dans le Vault Supabase `nearly_push_function_url` (URL complète de `send-push`) et `nearly_push_webhook_secret` (même secret). La migration `202610110002_push_dispatch.sql` émet les événements cœur, match et message ; sans ces deux secrets, les opérations sociales continuent et le serveur écrit un avertissement, mais aucun push n’est distribué. Déployez aussi `delete-account` pour activer la suppression distante.
+
+Les migrations non encore vérifiées sur le projet distant sont `202610100004_push_tokens.sql`, `202610100005_proximity.sql`, `202610110001_photo_order.sql` et `202610110002_push_dispatch.sql`. Vérifiez l’historique Supabase distant avant tout `db push`; aucune migration distante n’a été appliquée pendant cette reprise.
 
 ## Vérifications
 

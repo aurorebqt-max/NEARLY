@@ -2,6 +2,15 @@
 
 Mise à jour : **10 octobre 2026**. Sprint 4 engagé : première application Expo/React Native en place dans `mobile/`, le web et le mode local/mock sont conservés.
 
+## Reprise du 11 octobre 2026 — sauvegarde en pause
+
+- Le seul Codespace accessible est `/workspaces/FREYMO`, dépôt `aurorebqt-max/NEARLY`, branche `main` à `f32d431` (identique à `origin/main`). Les commits `ffeffd1` et `9ae36a6` ne sont pas présents dans les références ou objets Git accessibles ; `gh codespace list` ne montre pas d’autre environnement. Les fichiers `/tmp/nearly-sprint4-sauvegarde.patch` et `/tmp/nearly-sprint4-fichiers.tar.gz` ont été retrouvés, et le patch correspond aux modifications locales suivies.
+- GitHub Auth est connecté au compte `aurorebqt-max`; les permissions du dépôt comprennent `push`, et `git push --dry-run origin main` a répondu `Everything up-to-date`.
+- Complété dans cette reprise : verrouillage de l’accès au parcours principal jusqu’à l’onboarding, reprise locale du brouillon, contrôles de profil adulte déclaratif, sauvegarde des préférences/questionnaire, import manquant qui empêchait les bundles natifs, réorganisation des photos (nouvelle migration SQL), signalement/blocage depuis la conversation, export JSON, suppression distante du compte (Edge Function), vérification bidirectionnelle des blocages sur les push, et distribution serveur des événements cœur/match/message (Edge Function + migration, à configurer côté Supabase).
+- Vérifications passées : typecheck mobile, exports Metro Android et iOS, lint et build web, `git diff --check`. Les deux exports ne sont pas des APK/IPA installables. `npm run test:supabase` n’a pas pu démarrer : aucun conteneur Supabase/Docker correspondant ni volume Supabase disponible ; `supabase migration list --local` échoue en connexion refusée. Aucun schéma n’a été appliqué localement ou à distance durant cette reprise.
+- Bloqueurs d’installation : `EXPO_PUBLIC_EAS_PROJECT_ID` et les URL/clés publiques Supabase de développement ne sont pas configurés ; aucun build EAS distant n’a été lancé. Le build iOS installable nécessitera également un compte Apple/certificats. Le scan BLE natif reste absent et aucun essai physique n’a été fait.
+- État de reprise : les changements antérieurs Sprint 4 présents dans l’arbre et les ajouts de cette reprise sont conservés pour un commit cohérent; avant tout `db push`, comparer l’historique distant des migrations `202610100004`, `202610100005`, `202610110001` et `202610110002`.
+
 ## Sprint 4 — application native, premier bloc
 
 État initial repris : `main`/`origin/main` à `e5cdf45` (`fix: stabilize Supabase auth and validate real account photo flows`), arbre propre. Aucun projet natif, manifeste Expo ou dépendance React Native préexistants ; `src/features/mobile` contient les vues web à ne pas porter telles quelles.

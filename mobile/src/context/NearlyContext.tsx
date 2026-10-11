@@ -1,12 +1,14 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type PropsWithChildren } from 'react';
-import type { LocalState } from '../../../src/domain/models';
-import { getSnapshot, supabase } from '../lib/supabase';
+import type { LocalState } from '../domain/models';
+import { getSnapshot } from '../lib/supabase';
+import { appLifecycle, type RealtimeStatus } from '../services/appLifecycle';
 
 type NearlyValue = {
   snapshot: LocalState | null;
   loading: boolean;
   busy: boolean;
   error: string | null;
+  realtimeStatus: RealtimeStatus;
   reload: () => Promise<void>;
   perform: (operation: () => Promise<void>) => Promise<boolean>;
   clearError: () => void;
@@ -19,6 +21,7 @@ export function NearlyProvider({ children, userId }: PropsWithChildren<{ userId:
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [realtimeStatus, setRealtimeStatus] = useState<RealtimeStatus>('stopped');
 
   const reload = useCallback(async () => {
     setError(null);
@@ -33,31 +36,16 @@ export function NearlyProvider({ children, userId }: PropsWithChildren<{ userId:
 
   useEffect(() => {
     let active = true;
-    const load = async () => {
-      try {
-        const next = await getSnapshot();
-        if (active) setSnapshot(next);
-      } catch (cause) {
-        if (active) setError(cause instanceof Error ? cause.message : 'Impossible de charger votre espace Nearly.');
-      } finally {
-        if (active) setLoading(false);
-      }
-    };
-    void load();
-
-    const channel = supabase?.channel(`nearly-${userId}`)
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'hearts' }, () => { void reload(); })
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'matches' }, () => { void reload(); })
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'messages' }, () => { void reload(); })
-      .subscribe(status => {
-        if (active && (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT')) {
-          setError('Le temps réel est indisponible. Actualisez pour récupérer les dernières données.');
-        }
-      });
-
+    void reload();
+    appLifecycle.start(userId, {
+      refresh: reload,
+      status: status => {
+        if (active) setRealtimeStatus(status);
+      },
+    });
     return () => {
       active = false;
-      if (channel) void supabase?.removeChannel(channel);
+      appLifecycle.stop();
     };
   }, [reload, userId]);
 
@@ -77,8 +65,8 @@ export function NearlyProvider({ children, userId }: PropsWithChildren<{ userId:
   }, [reload]);
 
   const value = useMemo(() => ({
-    snapshot, loading, busy, error, reload, perform, clearError: () => setError(null),
-  }), [snapshot, loading, busy, error, reload, perform]);
+    snapshot, loading, busy, error, realtimeStatus, reload, perform, clearError: () => setError(null),
+  }), [snapshot, loading, busy, error, realtimeStatus, reload, perform]);
 
   return <NearlyContext.Provider value={value}>{children}</NearlyContext.Provider>;
 }

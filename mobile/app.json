@@ -15,6 +15,7 @@
       "edgeToEdgeEnabled": true
     },
     "plugins": [
+      "expo-notifications",
       [
         "expo-image-picker",
         {
